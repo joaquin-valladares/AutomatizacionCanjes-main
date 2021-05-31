@@ -1,0 +1,1698 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AUTCANJESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TBL_Anio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="anio" Type="int" />
+        </EntityType>
+        <EntityType Name="TBL_Casa_Proveedor_SAP">
+          <Key>
+            <PropertyRef Name="Cod_Casa_SAP" />
+            <PropertyRef Name="Cod_Prov_SAP" />
+            <PropertyRef Name="Cod_Cliente_SAP" />
+            <PropertyRef Name="Sociedad" />
+          </Key>
+          <Property Name="Cod_Casa_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cod_Prov_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cod_Cliente_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sociedad" Type="nvarchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_Centros">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_sociedad" Type="int" />
+          <Property Name="nombre_centro" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="TBL_DetalleSAP">
+          <Key>
+            <PropertyRef Name="Consecutivo" />
+          </Key>
+          <Property Name="Consecutivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Documento" Type="int" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="Nombre_Segun_Proveedor" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Cantidad_Solicitada" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Saldo_SAP" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Cantidad_Enviar" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="CENTRO" Type="char" MaxLength="4" />
+          <Property Name="ALMACEN" Type="char" MaxLength="4" />
+          <Property Name="LOTE" Type="char" MaxLength="10" />
+          <Property Name="FECHA_CAD" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="UNIDAD" Type="char" MaxLength="3" />
+          <Property Name="DOCUMENT_SAP" Type="char" MaxLength="10" />
+          <Property Name="DOCUMENT_YEAR" Type="char" MaxLength="10" />
+          <Property Name="Mensaje1" Type="varchar" MaxLength="10" />
+          <Property Name="Mensaje2" Type="char" MaxLength="2" />
+          <Property Name="Mensaje3" Type="varchar" MaxLength="75" />
+          <Property Name="Mensaje4" Type="varchar" MaxLength="220" />
+          <Property Name="TYPE" Type="char" MaxLength="1" />
+          <Property Name="Particion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_Dias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dia" Type="int" />
+        </EntityType>
+        <EntityType Name="TBL_EncabezadoSAP">
+          <Key>
+            <PropertyRef Name="Documento" />
+          </Key>
+          <Property Name="Documento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cod_Casa_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cod_Prov_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cod_Cliente_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sociedad" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Centro" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cliente" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar(max)" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Fecha_Autorizacion" Type="datetime" Nullable="false" />
+          <Property Name="Fecha_Migo" Type="datetime" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_LOGERROR">
+          <Key>
+            <PropertyRef Name="Consecutivo" />
+          </Key>
+          <Property Name="Consecutivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Documento" Type="int" />
+          <Property Name="MESSAGE_ERROR" Type="varchar" MaxLength="150" />
+          <Property Name="TYPE" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="TBL_MaestrosCanjes">
+          <Key>
+            <PropertyRef Name="Cod_Casa_SAP" />
+            <PropertyRef Name="Cod_Prov_SAP" />
+            <PropertyRef Name="Cod_Cliente_SAP" />
+            <PropertyRef Name="Sociedad" />
+            <PropertyRef Name="Cod_Prod_SAP" />
+          </Key>
+          <Property Name="Cod_Casa_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cod_Prov_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cod_Cliente_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sociedad" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="Nombre_SAP" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Nombre_Segun_Proveedor" Type="varchar" MaxLength="75" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_MaterialesSAP">
+          <Key>
+            <PropertyRef Name="MATKL" />
+            <PropertyRef Name="MATNR" />
+          </Key>
+          <Property Name="MATKL" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="MATNR" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="MAKTX" Type="varchar" MaxLength="75" />
+          <Property Name="MATLAB" Type="varchar" MaxLength="75" />
+        </EntityType>
+        <EntityType Name="TBL_Meses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreMes" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="TBL_Sociedades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre_sociedad" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_UsuariosCanjes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="200" />
+          <Property Name="pass" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="token_recovery" Type="nvarchar(max)" />
+          <Property Name="id_sociedad" Type="int" />
+          <Property Name="id_centro" Type="int" />
+          <Property Name="id_estado" Type="int" />
+          <Property Name="id_rol" Type="int" />
+        </EntityType>
+        <EntityType Name="TBL_UsuariosCanjes_Estado">
+          <Key>
+            <PropertyRef Name="id_estado" />
+          </Key>
+          <Property Name="id_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TBL_UsuariosCanjes_Roles">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rol" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_Autorizaciones_Detalle' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_Autorizaciones_Detalle">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Cod_Prod_SAP" />
+            <PropertyRef Name="MAKTX" />
+            <PropertyRef Name="Cantidad_Solicitada" />
+            <PropertyRef Name="Cantidad_Enviar" />
+            <PropertyRef Name="Saldo_SAP" />
+            <PropertyRef Name="FECHA_CAD" />
+            <PropertyRef Name="Particion" />
+          </Key>
+          <Property Name="Documento" Type="int" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="MAKTX" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Cantidad_Solicitada" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Cantidad_Enviar" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Saldo_SAP" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Mensaje1" Type="varchar" MaxLength="10" />
+          <Property Name="Mensaje2" Type="char" MaxLength="2" />
+          <Property Name="Mensaje3" Type="varchar" MaxLength="75" />
+          <Property Name="Mensaje4" Type="varchar" MaxLength="220" />
+          <Property Name="LOTE" Type="char" MaxLength="10" />
+          <Property Name="FECHA_CAD" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="Particion" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_Autorizaciones_Encabezado' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_Autorizaciones_Encabezado">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Observaciones" />
+            <PropertyRef Name="Cliente" />
+            <PropertyRef Name="Sociedad" />
+            
+            <PropertyRef Name="Cod_Cliente_SAP" />
+            <PropertyRef Name="Cod_Prov_SAP" />
+            <PropertyRef Name="Proveedor" />
+            <PropertyRef Name="Cod_Casa_SAP" />
+            <PropertyRef Name="CASA" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Documento" Type="int" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar(max)" Nullable="false" />
+          <Property Name="Cliente" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sociedad" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Nombre de Sociedad" Type="varchar" MaxLength="50" />
+          <Property Name="Centro" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cod_Cliente_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cod_Prov_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Proveedor" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="Cod_Casa_SAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CASA" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_Casa_ClientePrv_Sociedad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_Casa_ClientePrv_Sociedad">
+          <Key>
+            <PropertyRef Name="CodCasa" />
+            <PropertyRef Name="Casa" />
+            <PropertyRef Name="CodProvSAP" />
+            <PropertyRef Name="Nombre según Proveedor" />
+            <PropertyRef Name="CodClienteSAP" />
+            <PropertyRef Name="CodSoc" />
+          </Key>
+          <Property Name="CodCasa" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Casa" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CodProvSAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Nombre según Proveedor" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="CodClienteSAP" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CodSoc" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Sociedad" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_Casa_Proveedor_SAP' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_Casa_Proveedor_SAP">
+          <Key>
+            <PropertyRef Name="LIFNR" />
+            <PropertyRef Name="KUNNR" />
+            <PropertyRef Name="NAME1" />
+            <PropertyRef Name="BUKRS" />
+          </Key>
+          <Property Name="LIFNR" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="KUNNR" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME1" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="BUKRS" Type="nvarchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_CASA_SAP' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_CASA_SAP">
+          <Key>
+            <PropertyRef Name="COD_CASA" />
+            <PropertyRef Name="CASA" />
+          </Key>
+          <Property Name="COD_CASA" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="CASA" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_CLIENTE_X_SOCIEDAD_SAP' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_CLIENTE_X_SOCIEDAD_SAP">
+          <Key>
+            <PropertyRef Name="CODIGO_CLIENTE" />
+            <PropertyRef Name="NOMBRE_CLIENTE" />
+            <PropertyRef Name="SOCIEDAD_CLIENTE" />
+          </Key>
+          <Property Name="CODIGO_CLIENTE" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="NOMBRE_CLIENTE" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="SOCIEDAD_CLIENTE" Type="nvarchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_DatosUsuarios' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_DatosUsuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="200" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="pass" Type="varchar" MaxLength="50" />
+          <Property Name="id_sociedad" Type="int" />
+          <Property Name="nombre_sociedad" Type="varchar" MaxLength="50" />
+          <Property Name="id_centro" Type="int" />
+          <Property Name="nombre_centro" Type="varchar" MaxLength="150" />
+          <Property Name="id_estado" Type="int" />
+          <Property Name="estado" Type="varchar" MaxLength="50" />
+          <Property Name="id_rol" Type="int" />
+          <Property Name="rol" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_MATERIALES_CASAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_MATERIALES_CASAS">
+          <Key>
+            <PropertyRef Name="MATNR" />
+            <PropertyRef Name="MAKTX" />
+            <PropertyRef Name="MATKL" />
+          </Key>
+          <Property Name="MATNR" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="MAKTX" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="MATKL" Type="nvarchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_PROVEEDORES_SAP' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_PROVEEDORES_SAP">
+          <Key>
+            <PropertyRef Name="MANDT" />
+            <PropertyRef Name="KUNNR" />
+            <PropertyRef Name="LIFNR" />
+            <PropertyRef Name="SORTL" />
+            <PropertyRef Name="NAME1" />
+          </Key>
+          <Property Name="MANDT" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="KUNNR" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LIFNR" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="SORTL" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME1" Type="nvarchar" MaxLength="35" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_ReporteLogs' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_ReporteLogs">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Cod_Prod_SAP" />
+            <PropertyRef Name="Nombre_SAP" />
+            <PropertyRef Name="Nombre_Segun_Proveedor" />
+            <PropertyRef Name="Cantidad_Solicitada" />
+            <PropertyRef Name="Cantidad_Enviar" />
+            <PropertyRef Name="Saldo_SAP" />
+            <PropertyRef Name="Sociedad" />
+            <PropertyRef Name="Cliente" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Fecha_Autorizacion" />
+            <PropertyRef Name="Observaciones" />
+            <PropertyRef Name="Fecha_Migo" />
+          </Key>
+          <Property Name="Documento" Type="int" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="Nombre_SAP" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Nombre_Segun_Proveedor" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Cantidad_Solicitada" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Cantidad_Enviar" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Saldo_SAP" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="UNIDAD" Type="char" MaxLength="3" />
+          <Property Name="Mensaje1" Type="varchar" MaxLength="10" />
+          <Property Name="Mensaje2" Type="char" MaxLength="2" />
+          <Property Name="Mensaje3" Type="varchar" MaxLength="75" />
+          <Property Name="Mensaje4" Type="varchar" MaxLength="220" />
+          <Property Name="Sociedad" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="nombre_sociedad" Type="varchar" MaxLength="50" />
+          <Property Name="CENTRO" Type="char" MaxLength="4" />
+          <Property Name="nombre_centro" Type="varchar" MaxLength="150" />
+          <Property Name="Cliente" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Fecha_Autorizacion" Type="datetime" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar(max)" Nullable="false" />
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="200" />
+          <Property Name="DOCUMENT_SAP" Type="char" MaxLength="10" />
+          <Property Name="Fecha_Migo" Type="datetime" Nullable="false" />
+          <Property Name="DOCUMENT_YEAR" Type="char" MaxLength="10" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_ReporteLogs1' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_ReporteLogs1">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Cod_Prod_SAP" />
+            <PropertyRef Name="Nombre_Segun_Proveedor" />
+            <PropertyRef Name="Cantidad_Solicitada" />
+            <PropertyRef Name="Cantidad_Enviar" />
+            <PropertyRef Name="Saldo_SAP" />
+            <PropertyRef Name="Sociedad" />
+            <PropertyRef Name="Nombre_Cliente" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Observaciones" />
+          </Key>
+          <Property Name="Documento" Type="int" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="Nombre_Segun_Proveedor" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Cantidad_Solicitada" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Cantidad_Enviar" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Saldo_SAP" Type="money" Nullable="false" />
+          <Property Name="Sociedad" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="Nombre_Cliente" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'AUTCANJES.dbo.VSP_ReporteLogsCanjes' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="VSP_ReporteLogsCanjes">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Cod_Prod_SAP" />
+            <PropertyRef Name="Nombre_SAP" />
+            <PropertyRef Name="Nombre_Segun_Proveedor" />
+            <PropertyRef Name="Cantidad_Solicitada" />
+            <PropertyRef Name="Cantidad_Enviar" />
+            <PropertyRef Name="Saldo_SAP" />
+            <PropertyRef Name="Sociedad" />
+            <PropertyRef Name="Nombre_Cliente" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Observaciones" />
+          </Key>
+          <Property Name="Documento" Type="int" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="Nombre_SAP" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Nombre_Segun_Proveedor" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Cantidad_Solicitada" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Cantidad_Enviar" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Saldo_SAP" Type="decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="UNIDAD" Type="char" MaxLength="3" />
+          <Property Name="Mensaje1" Type="varchar" MaxLength="10" />
+          <Property Name="Mensaje2" Type="char" MaxLength="2" />
+          <Property Name="Mensaje3" Type="varchar" MaxLength="75" />
+          <Property Name="Mensaje4" Type="varchar" MaxLength="75" />
+          <Property Name="Sociedad" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="CENTRO" Type="char" MaxLength="4" />
+          <Property Name="Nombre_Cliente" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Function Name="sp_convertir_fecha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha_entrada" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_LOGERROR" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="mensaje" Type="varchar" Mode="In" />
+          <Parameter Name="type" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="cod_prod_sap" Type="nvarchar" Mode="In" />
+          <Parameter Name="nombre_segun_proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="cantidad_solicitada" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP_delete2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="material" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="material" Type="nvarchar" Mode="In" />
+          <Parameter Name="Cantidad_Solicitada" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP_update1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="material" Type="nvarchar" Mode="In" />
+          <Parameter Name="mensaje" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP_update2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="material" Type="nvarchar" Mode="In" />
+          <Parameter Name="mensaje" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP_update2_1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="material" Type="nvarchar" Mode="In" />
+          <Parameter Name="cantidad" Type="decimal" Mode="In" />
+          <Parameter Name="centro" Type="char" Mode="In" />
+          <Parameter Name="almacen" Type="char" Mode="In" />
+          <Parameter Name="lote" Type="char" Mode="In" />
+          <Parameter Name="fecha_cad" Type="char" Mode="In" />
+          <Parameter Name="unidad" Type="char" Mode="In" />
+          <Parameter Name="mensaje" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP_update2_2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="document_sap" Type="char" Mode="In" />
+          <Parameter Name="document_year" Type="char" Mode="In" />
+          <Parameter Name="message" Type="varchar" Mode="In" />
+          <Parameter Name="type" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP_update3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="material" Type="nvarchar" Mode="In" />
+          <Parameter Name="mensaje" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP_update4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="material" Type="nvarchar" Mode="In" />
+          <Parameter Name="mensaje" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_DetalleSAP2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="cod_prod_sap" Type="nvarchar" Mode="In" />
+          <Parameter Name="cantidad_enviar" Type="decimal" Mode="In" />
+          <Parameter Name="almacen" Type="char" Mode="In" />
+          <Parameter Name="centro" Type="char" Mode="In" />
+          <Parameter Name="lote" Type="char" Mode="In" />
+          <Parameter Name="fecha_cad" Type="char" Mode="In" />
+          <Parameter Name="unidad" Type="char" Mode="In" />
+          <Parameter Name="mensaje3" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_EncabezadoSAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cod_casa_sap" Type="nvarchar" Mode="In" />
+          <Parameter Name="cod_prov_sap" Type="nvarchar" Mode="In" />
+          <Parameter Name="cod_cliente_sap" Type="nvarchar" Mode="In" />
+          <Parameter Name="sociedad" Type="nvarchar" Mode="In" />
+          <Parameter Name="centro" Type="int" Mode="In" />
+          <Parameter Name="cliente" Type="varchar" Mode="In" />
+          <Parameter Name="observaciones" Type="varchar(max)" Mode="In" />
+          <Parameter Name="idusuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_EncabezadoSAP_cambio_status1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="status" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_EncabezadoSAP_cambio_status2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="status" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_EncabezadoSAP_cambio_status3" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="status" Type="char" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_EncabezadoSAP_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_EncabezadoSAP_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documento" Type="int" Mode="In" />
+          <Parameter Name="cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="observaciones" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_MaestroCanjes_cambio_nombreSAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MATNR" Type="nvarchar" Mode="In" />
+          <Parameter Name="MAKTX" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_MaestrosCanjes_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="matkl" Type="varchar" Mode="In" />
+          <Parameter Name="kunnr" Type="varchar" Mode="In" />
+          <Parameter Name="sociedad" Type="varchar" Mode="In" />
+          <Parameter Name="matnr" Type="varchar" Mode="In" />
+          <Parameter Name="matlab" Type="varchar" Mode="In" />
+          <Parameter Name="nsproveedor" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_MaestrosCanjes_EliminarMasivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codcasa" Type="nvarchar" Mode="In" />
+          <Parameter Name="codprov" Type="nvarchar" Mode="In" />
+          <Parameter Name="sociedad" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_TBL_MaterialesSAP_Insert1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_TBL_MaterialesSAP_Update1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="matkl" Type="nvarchar" Mode="In" />
+          <Parameter Name="matnr" Type="nvarchar" Mode="In" />
+          <Parameter Name="matlab" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="AUTCANJESModelStoreContainer">
+          <EntitySet Name="TBL_Anio" EntityType="Self.TBL_Anio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Casa_Proveedor_SAP" EntityType="Self.TBL_Casa_Proveedor_SAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Centros" EntityType="Self.TBL_Centros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_DetalleSAP" EntityType="Self.TBL_DetalleSAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Dias" EntityType="Self.TBL_Dias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_EncabezadoSAP" EntityType="Self.TBL_EncabezadoSAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_LOGERROR" EntityType="Self.TBL_LOGERROR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_MaestrosCanjes" EntityType="Self.TBL_MaestrosCanjes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_MaterialesSAP" EntityType="Self.TBL_MaterialesSAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Meses" EntityType="Self.TBL_Meses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_Sociedades" EntityType="Self.TBL_Sociedades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_UsuariosCanjes" EntityType="Self.TBL_UsuariosCanjes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_UsuariosCanjes_Estado" EntityType="Self.TBL_UsuariosCanjes_Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBL_UsuariosCanjes_Roles" EntityType="Self.TBL_UsuariosCanjes_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VSP_Autorizaciones_Detalle" EntityType="Self.VSP_Autorizaciones_Detalle" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_Autorizaciones_Detalle].[Documento] AS [Documento], 
+    [VSP_Autorizaciones_Detalle].[Cod_Prod_SAP] AS [Cod_Prod_SAP], 
+    [VSP_Autorizaciones_Detalle].[MAKTX] AS [MAKTX], 
+    [VSP_Autorizaciones_Detalle].[Cantidad_Solicitada] AS [Cantidad_Solicitada], 
+    [VSP_Autorizaciones_Detalle].[Cantidad_Enviar] AS [Cantidad_Enviar], 
+    [VSP_Autorizaciones_Detalle].[Saldo_SAP] AS [Saldo_SAP], 
+    [VSP_Autorizaciones_Detalle].[Mensaje1] AS [Mensaje1], 
+    [VSP_Autorizaciones_Detalle].[Mensaje2] AS [Mensaje2], 
+    [VSP_Autorizaciones_Detalle].[Mensaje3] AS [Mensaje3], 
+    [VSP_Autorizaciones_Detalle].[Mensaje4] AS [Mensaje4], 
+    [VSP_Autorizaciones_Detalle].[LOTE] AS [LOTE], 
+    [VSP_Autorizaciones_Detalle].[FECHA_CAD] AS [FECHA_CAD], 
+    [VSP_Autorizaciones_Detalle].[Particion] AS [Particion]
+    FROM [dbo].[VSP_Autorizaciones_Detalle] AS [VSP_Autorizaciones_Detalle]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_Autorizaciones_Encabezado" EntityType="Self.VSP_Autorizaciones_Encabezado" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_Autorizaciones_Encabezado].[Documento] AS [Documento], 
+    [VSP_Autorizaciones_Encabezado].[Observaciones] AS [Observaciones], 
+    [VSP_Autorizaciones_Encabezado].[Cliente] AS [Cliente], 
+    [VSP_Autorizaciones_Encabezado].[Sociedad] AS [Sociedad], 
+    [VSP_Autorizaciones_Encabezado].[Nombre de Sociedad] AS [Nombre de Sociedad], 
+    [VSP_Autorizaciones_Encabezado].[Centro] AS [Centro], 
+    [VSP_Autorizaciones_Encabezado].[Cod_Cliente_SAP] AS [Cod_Cliente_SAP], 
+    [VSP_Autorizaciones_Encabezado].[Cod_Prov_SAP] AS [Cod_Prov_SAP], 
+    [VSP_Autorizaciones_Encabezado].[Proveedor] AS [Proveedor], 
+    [VSP_Autorizaciones_Encabezado].[Cod_Casa_SAP] AS [Cod_Casa_SAP], 
+    [VSP_Autorizaciones_Encabezado].[CASA] AS [CASA], 
+    [VSP_Autorizaciones_Encabezado].[Estado] AS [Estado], 
+    [VSP_Autorizaciones_Encabezado].[Fecha] AS [Fecha], 
+    [VSP_Autorizaciones_Encabezado].[Id_Usuario] AS [Id_Usuario]
+    FROM [dbo].[VSP_Autorizaciones_Encabezado] AS [VSP_Autorizaciones_Encabezado]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_Casa_ClientePrv_Sociedad" EntityType="Self.VSP_Casa_ClientePrv_Sociedad" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_Casa_ClientePrv_Sociedad].[CodCasa] AS [CodCasa], 
+    [VSP_Casa_ClientePrv_Sociedad].[Casa] AS [Casa], 
+    [VSP_Casa_ClientePrv_Sociedad].[CodProvSAP] AS [CodProvSAP], 
+    [VSP_Casa_ClientePrv_Sociedad].[Nombre según Proveedor] AS [Nombre según Proveedor], 
+    [VSP_Casa_ClientePrv_Sociedad].[CodClienteSAP] AS [CodClienteSAP], 
+    [VSP_Casa_ClientePrv_Sociedad].[CodSoc] AS [CodSoc], 
+    [VSP_Casa_ClientePrv_Sociedad].[Sociedad] AS [Sociedad]
+    FROM [dbo].[VSP_Casa_ClientePrv_Sociedad] AS [VSP_Casa_ClientePrv_Sociedad]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_Casa_Proveedor_SAP" EntityType="Self.VSP_Casa_Proveedor_SAP" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_Casa_Proveedor_SAP].[LIFNR] AS [LIFNR], 
+    [VSP_Casa_Proveedor_SAP].[KUNNR] AS [KUNNR], 
+    [VSP_Casa_Proveedor_SAP].[NAME1] AS [NAME1], 
+    [VSP_Casa_Proveedor_SAP].[BUKRS] AS [BUKRS]
+    FROM [dbo].[VSP_Casa_Proveedor_SAP] AS [VSP_Casa_Proveedor_SAP]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_CASA_SAP" EntityType="Self.VSP_CASA_SAP" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_CASA_SAP].[COD_CASA] AS [COD_CASA], 
+    [VSP_CASA_SAP].[CASA] AS [CASA]
+    FROM [dbo].[VSP_CASA_SAP] AS [VSP_CASA_SAP]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_CLIENTE_X_SOCIEDAD_SAP" EntityType="Self.VSP_CLIENTE_X_SOCIEDAD_SAP" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_CLIENTE_X_SOCIEDAD_SAP].[CODIGO_CLIENTE] AS [CODIGO_CLIENTE], 
+    [VSP_CLIENTE_X_SOCIEDAD_SAP].[NOMBRE_CLIENTE] AS [NOMBRE_CLIENTE], 
+    [VSP_CLIENTE_X_SOCIEDAD_SAP].[SOCIEDAD_CLIENTE] AS [SOCIEDAD_CLIENTE]
+    FROM [dbo].[VSP_CLIENTE_X_SOCIEDAD_SAP] AS [VSP_CLIENTE_X_SOCIEDAD_SAP]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_DatosUsuarios" EntityType="Self.VSP_DatosUsuarios" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_DatosUsuarios].[id] AS [id], 
+    [VSP_DatosUsuarios].[nombreUsuario] AS [nombreUsuario], 
+    [VSP_DatosUsuarios].[email] AS [email], 
+    [VSP_DatosUsuarios].[pass] AS [pass], 
+    [VSP_DatosUsuarios].[id_sociedad] AS [id_sociedad], 
+    [VSP_DatosUsuarios].[nombre_sociedad] AS [nombre_sociedad], 
+    [VSP_DatosUsuarios].[id_centro] AS [id_centro], 
+    [VSP_DatosUsuarios].[nombre_centro] AS [nombre_centro], 
+    [VSP_DatosUsuarios].[id_estado] AS [id_estado], 
+    [VSP_DatosUsuarios].[estado] AS [estado], 
+    [VSP_DatosUsuarios].[id_rol] AS [id_rol], 
+    [VSP_DatosUsuarios].[rol] AS [rol]
+    FROM [dbo].[VSP_DatosUsuarios] AS [VSP_DatosUsuarios]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_MATERIALES_CASAS" EntityType="Self.VSP_MATERIALES_CASAS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_MATERIALES_CASAS].[MATNR] AS [MATNR], 
+    [VSP_MATERIALES_CASAS].[MAKTX] AS [MAKTX], 
+    [VSP_MATERIALES_CASAS].[MATKL] AS [MATKL]
+    FROM [dbo].[VSP_MATERIALES_CASAS] AS [VSP_MATERIALES_CASAS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_PROVEEDORES_SAP" EntityType="Self.VSP_PROVEEDORES_SAP" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_PROVEEDORES_SAP].[MANDT] AS [MANDT], 
+    [VSP_PROVEEDORES_SAP].[KUNNR] AS [KUNNR], 
+    [VSP_PROVEEDORES_SAP].[LIFNR] AS [LIFNR], 
+    [VSP_PROVEEDORES_SAP].[SORTL] AS [SORTL], 
+    [VSP_PROVEEDORES_SAP].[NAME1] AS [NAME1]
+    FROM [dbo].[VSP_PROVEEDORES_SAP] AS [VSP_PROVEEDORES_SAP]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_ReporteLogs" EntityType="Self.VSP_ReporteLogs" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_ReporteLogs].[Documento] AS [Documento], 
+    [VSP_ReporteLogs].[Cod_Prod_SAP] AS [Cod_Prod_SAP], 
+    [VSP_ReporteLogs].[Nombre_SAP] AS [Nombre_SAP], 
+    [VSP_ReporteLogs].[Nombre_Segun_Proveedor] AS [Nombre_Segun_Proveedor], 
+    [VSP_ReporteLogs].[Cantidad_Solicitada] AS [Cantidad_Solicitada], 
+    [VSP_ReporteLogs].[Cantidad_Enviar] AS [Cantidad_Enviar], 
+    [VSP_ReporteLogs].[Saldo_SAP] AS [Saldo_SAP], 
+    [VSP_ReporteLogs].[UNIDAD] AS [UNIDAD], 
+    [VSP_ReporteLogs].[Mensaje1] AS [Mensaje1], 
+    [VSP_ReporteLogs].[Mensaje2] AS [Mensaje2], 
+    [VSP_ReporteLogs].[Mensaje3] AS [Mensaje3], 
+    [VSP_ReporteLogs].[Mensaje4] AS [Mensaje4], 
+    [VSP_ReporteLogs].[Sociedad] AS [Sociedad], 
+    [VSP_ReporteLogs].[nombre_sociedad] AS [nombre_sociedad], 
+    [VSP_ReporteLogs].[CENTRO] AS [CENTRO], 
+    [VSP_ReporteLogs].[nombre_centro] AS [nombre_centro], 
+    [VSP_ReporteLogs].[Cliente] AS [Cliente], 
+    [VSP_ReporteLogs].[Estado] AS [Estado], 
+    [VSP_ReporteLogs].[Fecha_Autorizacion] AS [Fecha_Autorizacion], 
+    [VSP_ReporteLogs].[Observaciones] AS [Observaciones], 
+    [VSP_ReporteLogs].[nombreUsuario] AS [nombreUsuario], 
+    [VSP_ReporteLogs].[DOCUMENT_SAP] AS [DOCUMENT_SAP], 
+    [VSP_ReporteLogs].[Fecha_Migo] AS [Fecha_Migo], 
+    [VSP_ReporteLogs].[DOCUMENT_YEAR] AS [DOCUMENT_YEAR]
+    FROM [dbo].[VSP_ReporteLogs] AS [VSP_ReporteLogs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_ReporteLogs1" EntityType="Self.VSP_ReporteLogs1" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_ReporteLogs1].[Documento] AS [Documento], 
+    [VSP_ReporteLogs1].[Cod_Prod_SAP] AS [Cod_Prod_SAP], 
+    [VSP_ReporteLogs1].[Nombre_Segun_Proveedor] AS [Nombre_Segun_Proveedor], 
+    [VSP_ReporteLogs1].[Cantidad_Solicitada] AS [Cantidad_Solicitada], 
+    [VSP_ReporteLogs1].[Cantidad_Enviar] AS [Cantidad_Enviar], 
+    [VSP_ReporteLogs1].[Saldo_SAP] AS [Saldo_SAP], 
+    [VSP_ReporteLogs1].[Sociedad] AS [Sociedad], 
+    [VSP_ReporteLogs1].[Nombre_Cliente] AS [Nombre_Cliente], 
+    [VSP_ReporteLogs1].[Estado] AS [Estado], 
+    [VSP_ReporteLogs1].[Fecha] AS [Fecha], 
+    [VSP_ReporteLogs1].[Observaciones] AS [Observaciones]
+    FROM [dbo].[VSP_ReporteLogs1] AS [VSP_ReporteLogs1]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VSP_ReporteLogsCanjes" EntityType="Self.VSP_ReporteLogsCanjes" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VSP_ReporteLogsCanjes].[Documento] AS [Documento], 
+    [VSP_ReporteLogsCanjes].[Cod_Prod_SAP] AS [Cod_Prod_SAP], 
+    [VSP_ReporteLogsCanjes].[Nombre_SAP] AS [Nombre_SAP], 
+    [VSP_ReporteLogsCanjes].[Nombre_Segun_Proveedor] AS [Nombre_Segun_Proveedor], 
+    [VSP_ReporteLogsCanjes].[Cantidad_Solicitada] AS [Cantidad_Solicitada], 
+    [VSP_ReporteLogsCanjes].[Cantidad_Enviar] AS [Cantidad_Enviar], 
+    [VSP_ReporteLogsCanjes].[Saldo_SAP] AS [Saldo_SAP], 
+    [VSP_ReporteLogsCanjes].[UNIDAD] AS [UNIDAD], 
+    [VSP_ReporteLogsCanjes].[Mensaje1] AS [Mensaje1], 
+    [VSP_ReporteLogsCanjes].[Mensaje2] AS [Mensaje2], 
+    [VSP_ReporteLogsCanjes].[Mensaje3] AS [Mensaje3], 
+    [VSP_ReporteLogsCanjes].[Mensaje4] AS [Mensaje4], 
+    [VSP_ReporteLogsCanjes].[Sociedad] AS [Sociedad], 
+    [VSP_ReporteLogsCanjes].[CENTRO] AS [CENTRO], 
+    [VSP_ReporteLogsCanjes].[Nombre_Cliente] AS [Nombre_Cliente], 
+    [VSP_ReporteLogsCanjes].[Estado] AS [Estado], 
+    [VSP_ReporteLogsCanjes].[Fecha] AS [Fecha], 
+    [VSP_ReporteLogsCanjes].[Observaciones] AS [Observaciones]
+    FROM [dbo].[VSP_ReporteLogsCanjes] AS [VSP_ReporteLogsCanjes]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AUTCANJESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBL_Anio">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="anio" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TBL_Casa_Proveedor_SAP">
+          <Key>
+            <PropertyRef Name="Cod_Casa_SAP" />
+            <PropertyRef Name="Cod_Prov_SAP" />
+            <PropertyRef Name="Cod_Cliente_SAP" />
+            <PropertyRef Name="Sociedad" />
+          </Key>
+          <Property Name="Cod_Casa_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Prov_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Cliente_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sociedad" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_Centros">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_sociedad" Type="Int32" />
+          <Property Name="nombre_centro" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_Dias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dia" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TBL_EncabezadoSAP">
+          <Key>
+            <PropertyRef Name="Documento" />
+          </Key>
+          <Property Name="Documento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cod_Casa_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Prov_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Cliente_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sociedad" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Centro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_Autorizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha_Migo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_MaestrosCanjes">
+          <Key>
+            <PropertyRef Name="Cod_Casa_SAP" />
+            <PropertyRef Name="Cod_Prov_SAP" />
+            <PropertyRef Name="Cod_Cliente_SAP" />
+            <PropertyRef Name="Sociedad" />
+            <PropertyRef Name="Cod_Prod_SAP" />
+          </Key>
+          <Property Name="Cod_Casa_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Prov_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Cliente_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sociedad" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre_SAP" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Segun_Proveedor" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBL_Meses">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreMes" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_Sociedades">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre_sociedad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_UsuariosCanjes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreUsuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="token_recovery" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="id_sociedad" Type="Int32" />
+          <Property Name="id_centro" Type="Int32" />
+          <Property Name="id_estado" Type="Int32" />
+          <Property Name="id_rol" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TBL_UsuariosCanjes_Estado">
+          <Key>
+            <PropertyRef Name="id_estado" />
+          </Key>
+          <Property Name="id_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_UsuariosCanjes_Roles">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VSP_Autorizaciones_Detalle">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Cod_Prod_SAP" />
+            <PropertyRef Name="MAKTX" />
+            <PropertyRef Name="Cantidad_Solicitada" />
+            <PropertyRef Name="Cantidad_Enviar" />
+            <PropertyRef Name="Saldo_SAP" />
+            <PropertyRef Name="FECHA_CAD" />
+            <PropertyRef Name="Particion" />
+          </Key>
+          <Property Name="Documento" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MAKTX" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantidad_Solicitada" Type="Decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Cantidad_Enviar" Type="Decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Saldo_SAP" Type="Decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Mensaje1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje2" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Mensaje3" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje4" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
+          <Property Name="LOTE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="FECHA_CAD" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Particion" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VSP_Autorizaciones_Encabezado">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Observaciones" />
+            <PropertyRef Name="Cliente" />
+            <PropertyRef Name="Sociedad" />
+            <PropertyRef Name="Cod_Cliente_SAP" />
+            <PropertyRef Name="Cod_Prov_SAP" />
+            <PropertyRef Name="Proveedor" />
+            <PropertyRef Name="Cod_Casa_SAP" />
+            <PropertyRef Name="CASA" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Documento" Type="Int32" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sociedad" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre_de_Sociedad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Centro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Cliente_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Prov_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Proveedor" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cod_Casa_SAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CASA" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VSP_Casa_ClientePrv_Sociedad">
+          <Key>
+            <PropertyRef Name="CodCasa" />
+            <PropertyRef Name="Casa" />
+            <PropertyRef Name="CodProvSAP" />
+            <PropertyRef Name="Nombre_según_Proveedor" />
+            <PropertyRef Name="CodClienteSAP" />
+            <PropertyRef Name="CodSoc" />
+          </Key>
+          <Property Name="CodCasa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Casa" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodProvSAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre_según_Proveedor" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodClienteSAP" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodSoc" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sociedad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VSP_Casa_Proveedor_SAP">
+          <Key>
+            <PropertyRef Name="LIFNR" />
+            <PropertyRef Name="KUNNR" />
+            <PropertyRef Name="NAME1" />
+            <PropertyRef Name="BUKRS" />
+          </Key>
+          <Property Name="LIFNR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KUNNR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NAME1" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BUKRS" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VSP_CASA_SAP">
+          <Key>
+            <PropertyRef Name="COD_CASA" />
+            <PropertyRef Name="CASA" />
+          </Key>
+          <Property Name="COD_CASA" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CASA" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VSP_DatosUsuarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombreUsuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_sociedad" Type="Int32" />
+          <Property Name="nombre_sociedad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_centro" Type="Int32" />
+          <Property Name="nombre_centro" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="id_estado" Type="Int32" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_rol" Type="Int32" />
+          <Property Name="rol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VSP_MATERIALES_CASAS">
+          <Key>
+            <PropertyRef Name="MATNR" />
+            <PropertyRef Name="MAKTX" />
+            <PropertyRef Name="MATKL" />
+          </Key>
+          <Property Name="MATNR" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MAKTX" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MATKL" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VSP_PROVEEDORES_SAP">
+          <Key>
+            <PropertyRef Name="MANDT" />
+            <PropertyRef Name="KUNNR" />
+            <PropertyRef Name="LIFNR" />
+            <PropertyRef Name="SORTL" />
+            <PropertyRef Name="NAME1" />
+          </Key>
+          <Property Name="MANDT" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KUNNR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LIFNR" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SORTL" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NAME1" Type="String" MaxLength="35" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VSP_ReporteLogs1">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Cod_Prod_SAP" />
+            <PropertyRef Name="Nombre_Segun_Proveedor" />
+            <PropertyRef Name="Cantidad_Solicitada" />
+            <PropertyRef Name="Cantidad_Enviar" />
+            <PropertyRef Name="Saldo_SAP" />
+            <PropertyRef Name="Sociedad" />
+            <PropertyRef Name="Nombre_Cliente" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Observaciones" />
+          </Key>
+          <Property Name="Documento" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre_Segun_Proveedor" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantidad_Solicitada" Type="Decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Cantidad_Enviar" Type="Decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Saldo_SAP" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Sociedad" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre_Cliente" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VSP_ReporteLogsCanjes">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Cod_Prod_SAP" />
+            <PropertyRef Name="Nombre_SAP" />
+            <PropertyRef Name="Nombre_Segun_Proveedor" />
+            <PropertyRef Name="Cantidad_Solicitada" />
+            <PropertyRef Name="Cantidad_Enviar" />
+            <PropertyRef Name="Saldo_SAP" />
+            <PropertyRef Name="Sociedad" />
+            <PropertyRef Name="Nombre_Cliente" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="Observaciones" />
+          </Key>
+          <Property Name="Documento" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre_SAP" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Segun_Proveedor" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cantidad_Solicitada" Type="Decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Cantidad_Enviar" Type="Decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="Saldo_SAP" Type="Decimal" Precision="12" Scale="3" Nullable="false" />
+          <Property Name="UNIDAD" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Mensaje1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje2" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Mensaje3" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje4" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Sociedad" Type="String" MaxLength="4" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CENTRO" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Nombre_Cliente" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="AUTCANJESEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_Anio" EntityType="Self.TBL_Anio" />
+          <EntitySet Name="TBL_Casa_Proveedor_SAP" EntityType="Self.TBL_Casa_Proveedor_SAP" />
+          <EntitySet Name="TBL_Centros" EntityType="Self.TBL_Centros" />
+          <EntitySet Name="TBL_Dias" EntityType="Self.TBL_Dias" />
+          <EntitySet Name="TBL_EncabezadoSAP" EntityType="Self.TBL_EncabezadoSAP" />
+          <EntitySet Name="TBL_MaestrosCanjes" EntityType="Self.TBL_MaestrosCanjes" />
+          <EntitySet Name="TBL_Meses" EntityType="Self.TBL_Meses" />
+          <EntitySet Name="TBL_Sociedades" EntityType="Self.TBL_Sociedades" />
+          <EntitySet Name="TBL_UsuariosCanjes" EntityType="Self.TBL_UsuariosCanjes" />
+          <EntitySet Name="TBL_UsuariosCanjes_Estado" EntityType="Self.TBL_UsuariosCanjes_Estado" />
+          <EntitySet Name="TBL_UsuariosCanjes_Roles" EntityType="Self.TBL_UsuariosCanjes_Roles" />
+          <EntitySet Name="VSP_Autorizaciones_Detalle" EntityType="Self.VSP_Autorizaciones_Detalle" />
+          <EntitySet Name="VSP_Autorizaciones_Encabezado" EntityType="Self.VSP_Autorizaciones_Encabezado" />
+          <EntitySet Name="VSP_Casa_ClientePrv_Sociedad" EntityType="Self.VSP_Casa_ClientePrv_Sociedad" />
+          <EntitySet Name="VSP_Casa_Proveedor_SAP" EntityType="Self.VSP_Casa_Proveedor_SAP" />
+          <EntitySet Name="VSP_CASA_SAP" EntityType="Self.VSP_CASA_SAP" />
+          <EntitySet Name="VSP_DatosUsuarios" EntityType="Self.VSP_DatosUsuarios" />
+          <EntitySet Name="VSP_MATERIALES_CASAS" EntityType="Self.VSP_MATERIALES_CASAS" />
+          <EntitySet Name="VSP_PROVEEDORES_SAP" EntityType="Self.VSP_PROVEEDORES_SAP" />
+          <EntitySet Name="VSP_ReporteLogs1" EntityType="Self.VSP_ReporteLogs1" />
+          <EntitySet Name="VSP_ReporteLogsCanjes" EntityType="Self.VSP_ReporteLogsCanjes" />
+          <FunctionImport Name="sp_convertir_fecha" ReturnType="Collection(DateTime)">
+          <Parameter Name="fecha_entrada" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="cod_prod_sap" Mode="In" Type="String" />
+            <Parameter Name="nombre_segun_proveedor" Mode="In" Type="String" />
+            <Parameter Name="cantidad_solicitada" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP_Delete" ReturnType="Collection(String)">
+          <Parameter Name="documento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP_delete2" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="material" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP_update" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="material" Mode="In" Type="String" />
+            <Parameter Name="Cantidad_Solicitada" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP_update1" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="material" Mode="In" Type="String" />
+            <Parameter Name="mensaje" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP_update2" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="material" Mode="In" Type="String" />
+            <Parameter Name="mensaje" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP_update2_1" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="material" Mode="In" Type="String" />
+            <Parameter Name="cantidad" Mode="In" Type="Decimal" />
+            <Parameter Name="centro" Mode="In" Type="String" />
+            <Parameter Name="almacen" Mode="In" Type="String" />
+            <Parameter Name="lote" Mode="In" Type="String" />
+            <Parameter Name="fecha_cad" Mode="In" Type="String" />
+            <Parameter Name="unidad" Mode="In" Type="String" />
+            <Parameter Name="mensaje" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP_update2_2" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="document_sap" Mode="In" Type="String" />
+            <Parameter Name="document_year" Mode="In" Type="String" />
+            <Parameter Name="message" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP_update3" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="material" Mode="In" Type="String" />
+            <Parameter Name="mensaje" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP_update4" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="material" Mode="In" Type="String" />
+            <Parameter Name="mensaje" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_EncabezadoSAP" ReturnType="Collection(String)">
+            <Parameter Name="cod_casa_sap" Mode="In" Type="String" />
+            <Parameter Name="cod_prov_sap" Mode="In" Type="String" />
+            <Parameter Name="cod_cliente_sap" Mode="In" Type="String" />
+            <Parameter Name="sociedad" Mode="In" Type="String" />
+            <Parameter Name="centro" Mode="In" Type="Int32" />
+            <Parameter Name="cliente" Mode="In" Type="String" />
+            <Parameter Name="observaciones" Mode="In" Type="String" />
+            <Parameter Name="idusuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_EncabezadoSAP_cambio_status1" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_EncabezadoSAP_cambio_status2" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_EncabezadoSAP_cambio_status3" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_EncabezadoSAP_Delete" ReturnType="Collection(String)">
+          <Parameter Name="documento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_EncabezadoSAP_update" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="cliente" Mode="In" Type="String" />
+            <Parameter Name="observaciones" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_MaestrosCanjes_create" ReturnType="Collection(String)">
+            <Parameter Name="matkl" Mode="In" Type="String" />
+            <Parameter Name="kunnr" Mode="In" Type="String" />
+            <Parameter Name="sociedad" Mode="In" Type="String" />
+            <Parameter Name="matnr" Mode="In" Type="String" />
+            <Parameter Name="matlab" Mode="In" Type="String" />
+            <Parameter Name="nsproveedor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_MaestrosCanjes_EliminarMasivo" ReturnType="Collection(String)">
+            <Parameter Name="codcasa" Mode="In" Type="String" />
+            <Parameter Name="codprov" Mode="In" Type="String" />
+            <Parameter Name="sociedad" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_DetalleSAP2" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="cod_prod_sap" Mode="In" Type="String" />
+            <Parameter Name="cantidad_enviar" Mode="In" Type="Decimal" />
+            <Parameter Name="almacen" Mode="In" Type="String" />
+            <Parameter Name="centro" Mode="In" Type="String" />
+            <Parameter Name="lote" Mode="In" Type="String" />
+            <Parameter Name="fecha_cad" Mode="In" Type="String" />
+            <Parameter Name="unidad" Mode="In" Type="String" />
+            <Parameter Name="mensaje3" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TBL_MaestroCanjes_cambio_nombreSAP" ReturnType="Collection(String)">
+            <Parameter Name="MATNR" Mode="In" Type="String" />
+            <Parameter Name="MAKTX" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="TBL_DetalleSAP" EntityType="AUTCANJESModel.TBL_DetalleSAP" />
+          <EntitySet Name="VSP_ReporteLogs" EntityType="AUTCANJESModel.VSP_ReporteLogs" />
+          <FunctionImport Name="sp_LOGERROR" ReturnType="Collection(String)">
+            <Parameter Name="documento" Mode="In" Type="Int32" />
+            <Parameter Name="mensaje" Mode="In" Type="String" />
+            <Parameter Name="type" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="TBL_LOGERROR" EntityType="AUTCANJESModel.TBL_LOGERROR" />
+          <EntitySet Name="TBL_MaterialesSAP" EntityType="AUTCANJESModel.TBL_MaterialesSAP" />
+          <FunctionImport Name="sp_TBL_MaterialesSAP_Insert1" ReturnType="Collection(String)" />
+          <FunctionImport Name="sp_TBL_MaterialesSAP_Update1" ReturnType="Collection(String)">
+            <Parameter Name="matkl" Mode="In" Type="String" />
+            <Parameter Name="matnr" Mode="In" Type="String" />
+            <Parameter Name="matlab" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="VSP_CLIENTE_X_SOCIEDAD_SAP" EntityType="AUTCANJESModel.VSP_CLIENTE_X_SOCIEDAD_SAP" />
+        </EntityContainer>
+        <EntityType Name="TBL_DetalleSAP">
+          <Key>
+            <PropertyRef Name="Consecutivo" />
+          </Key>
+          <Property Name="Consecutivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre_Segun_Proveedor" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad_Solicitada" Type="Decimal" Nullable="false" Precision="12" Scale="3" />
+          <Property Name="Saldo_SAP" Type="Decimal" Nullable="false" Precision="12" Scale="3" />
+          <Property Name="Cantidad_Enviar" Type="Decimal" Nullable="false" Precision="12" Scale="3" />
+          <Property Name="CENTRO" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="ALMACEN" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="LOTE" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="FECHA_CAD" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="UNIDAD" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="DOCUMENT_SAP" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="DOCUMENT_YEAR" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Mensaje1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje2" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Mensaje3" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje4" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
+          <Property Name="TYPE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Particion" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VSP_ReporteLogs">
+          <Key>
+            <PropertyRef Name="Documento" />
+            <PropertyRef Name="Cod_Prod_SAP" />
+            <PropertyRef Name="Nombre_SAP" />
+            <PropertyRef Name="Nombre_Segun_Proveedor" />
+            <PropertyRef Name="Cantidad_Solicitada" />
+            <PropertyRef Name="Cantidad_Enviar" />
+            <PropertyRef Name="Saldo_SAP" />
+            <PropertyRef Name="Sociedad" />
+            <PropertyRef Name="Cliente" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Fecha_Autorizacion" />
+            <PropertyRef Name="Observaciones" />
+            <PropertyRef Name="Fecha_Migo" />
+          </Key>
+          <Property Name="Documento" Type="Int32" Nullable="false" />
+          <Property Name="Cod_Prod_SAP" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre_SAP" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_Segun_Proveedor" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Cantidad_Solicitada" Type="Decimal" Nullable="false" Precision="12" Scale="3" />
+          <Property Name="Cantidad_Enviar" Type="Decimal" Nullable="false" Precision="12" Scale="3" />
+          <Property Name="Saldo_SAP" Type="Decimal" Nullable="false" Precision="12" Scale="3" />
+          <Property Name="UNIDAD" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Mensaje1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje2" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Mensaje3" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Mensaje4" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
+          <Property Name="Sociedad" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="nombre_sociedad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CENTRO" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="nombre_centro" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Cliente" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha_Autorizacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observaciones" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="nombreUsuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DOCUMENT_SAP" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Fecha_Migo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DOCUMENT_YEAR" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_LOGERROR">
+          <Key>
+            <PropertyRef Name="Consecutivo" />
+          </Key>
+          <Property Name="Consecutivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento" Type="Int32" />
+          <Property Name="MESSAGE_ERROR" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TYPE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TBL_MaterialesSAP">
+          <Key>
+            <PropertyRef Name="MATKL" />
+            <PropertyRef Name="MATNR" />
+          </Key>
+          <Property Name="MATKL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MATNR" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="MAKTX" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="MATLAB" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VSP_CLIENTE_X_SOCIEDAD_SAP">
+          <Key>
+            <PropertyRef Name="CODIGO_CLIENTE" />
+            <PropertyRef Name="NOMBRE_CLIENTE" />
+            <PropertyRef Name="SOCIEDAD_CLIENTE" />
+          </Key>
+          <Property Name="CODIGO_CLIENTE" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE_CLIENTE" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="SOCIEDAD_CLIENTE" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AUTCANJESModelStoreContainer" CdmEntityContainer="AUTCANJESEntities">
+          <EntitySetMapping Name="TBL_Anio">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_Anio">
+              <MappingFragment StoreEntitySet="TBL_Anio">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="anio" ColumnName="anio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Casa_Proveedor_SAP">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_Casa_Proveedor_SAP">
+              <MappingFragment StoreEntitySet="TBL_Casa_Proveedor_SAP">
+                <ScalarProperty Name="Cod_Casa_SAP" ColumnName="Cod_Casa_SAP" />
+                <ScalarProperty Name="Cod_Prov_SAP" ColumnName="Cod_Prov_SAP" />
+                <ScalarProperty Name="Cod_Cliente_SAP" ColumnName="Cod_Cliente_SAP" />
+                <ScalarProperty Name="Sociedad" ColumnName="Sociedad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Centros">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_Centros">
+              <MappingFragment StoreEntitySet="TBL_Centros">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_sociedad" ColumnName="id_sociedad" />
+                <ScalarProperty Name="nombre_centro" ColumnName="nombre_centro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Dias">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_Dias">
+              <MappingFragment StoreEntitySet="TBL_Dias">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dia" ColumnName="dia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_EncabezadoSAP">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_EncabezadoSAP">
+              <MappingFragment StoreEntitySet="TBL_EncabezadoSAP">
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Cod_Casa_SAP" ColumnName="Cod_Casa_SAP" />
+                <ScalarProperty Name="Cod_Prov_SAP" ColumnName="Cod_Prov_SAP" />
+                <ScalarProperty Name="Cod_Cliente_SAP" ColumnName="Cod_Cliente_SAP" />
+                <ScalarProperty Name="Sociedad" ColumnName="Sociedad" />
+                <ScalarProperty Name="Centro" ColumnName="Centro" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
+                <ScalarProperty Name="Fecha_Migo" ColumnName="Fecha_Migo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_MaestrosCanjes">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_MaestrosCanjes">
+              <MappingFragment StoreEntitySet="TBL_MaestrosCanjes">
+                <ScalarProperty Name="Cod_Casa_SAP" ColumnName="Cod_Casa_SAP" />
+                <ScalarProperty Name="Cod_Prov_SAP" ColumnName="Cod_Prov_SAP" />
+                <ScalarProperty Name="Cod_Cliente_SAP" ColumnName="Cod_Cliente_SAP" />
+                <ScalarProperty Name="Sociedad" ColumnName="Sociedad" />
+                <ScalarProperty Name="Cod_Prod_SAP" ColumnName="Cod_Prod_SAP" />
+                <ScalarProperty Name="Nombre_SAP" ColumnName="Nombre_SAP" />
+                <ScalarProperty Name="Nombre_Segun_Proveedor" ColumnName="Nombre_Segun_Proveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Meses">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_Meses">
+              <MappingFragment StoreEntitySet="TBL_Meses">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombreMes" ColumnName="nombreMes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_Sociedades">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_Sociedades">
+              <MappingFragment StoreEntitySet="TBL_Sociedades">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre_sociedad" ColumnName="nombre_sociedad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_UsuariosCanjes">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_UsuariosCanjes">
+              <MappingFragment StoreEntitySet="TBL_UsuariosCanjes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="token_recovery" ColumnName="token_recovery" />
+                <ScalarProperty Name="id_sociedad" ColumnName="id_sociedad" />
+                <ScalarProperty Name="id_centro" ColumnName="id_centro" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_UsuariosCanjes_Estado">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_UsuariosCanjes_Estado">
+              <MappingFragment StoreEntitySet="TBL_UsuariosCanjes_Estado">
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_UsuariosCanjes_Roles">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_UsuariosCanjes_Roles">
+              <MappingFragment StoreEntitySet="TBL_UsuariosCanjes_Roles">
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_Autorizaciones_Detalle">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_Autorizaciones_Detalle">
+              <MappingFragment StoreEntitySet="VSP_Autorizaciones_Detalle">
+                <ScalarProperty Name="Particion" ColumnName="Particion" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Cod_Prod_SAP" ColumnName="Cod_Prod_SAP" />
+                <ScalarProperty Name="MAKTX" ColumnName="MAKTX" />
+                <ScalarProperty Name="Cantidad_Solicitada" ColumnName="Cantidad_Solicitada" />
+                <ScalarProperty Name="Cantidad_Enviar" ColumnName="Cantidad_Enviar" />
+                <ScalarProperty Name="Saldo_SAP" ColumnName="Saldo_SAP" />
+                <ScalarProperty Name="Mensaje1" ColumnName="Mensaje1" />
+                <ScalarProperty Name="Mensaje2" ColumnName="Mensaje2" />
+                <ScalarProperty Name="Mensaje3" ColumnName="Mensaje3" />
+                <ScalarProperty Name="Mensaje4" ColumnName="Mensaje4" />
+                <ScalarProperty Name="LOTE" ColumnName="LOTE" />
+                <ScalarProperty Name="FECHA_CAD" ColumnName="FECHA_CAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_Autorizaciones_Encabezado">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_Autorizaciones_Encabezado">
+              <MappingFragment StoreEntitySet="VSP_Autorizaciones_Encabezado">
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="Sociedad" ColumnName="Sociedad" />
+                <ScalarProperty Name="Nombre_de_Sociedad" ColumnName="Nombre de Sociedad" />
+                <ScalarProperty Name="Centro" ColumnName="Centro" />
+                <ScalarProperty Name="Cod_Cliente_SAP" ColumnName="Cod_Cliente_SAP" />
+                <ScalarProperty Name="Cod_Prov_SAP" ColumnName="Cod_Prov_SAP" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="Cod_Casa_SAP" ColumnName="Cod_Casa_SAP" />
+                <ScalarProperty Name="CASA" ColumnName="CASA" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_Casa_ClientePrv_Sociedad">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_Casa_ClientePrv_Sociedad">
+              <MappingFragment StoreEntitySet="VSP_Casa_ClientePrv_Sociedad">
+                <ScalarProperty Name="CodCasa" ColumnName="CodCasa" />
+                <ScalarProperty Name="Casa" ColumnName="Casa" />
+                <ScalarProperty Name="CodProvSAP" ColumnName="CodProvSAP" />
+                <ScalarProperty Name="Nombre_según_Proveedor" ColumnName="Nombre según Proveedor" />
+                <ScalarProperty Name="CodClienteSAP" ColumnName="CodClienteSAP" />
+                <ScalarProperty Name="CodSoc" ColumnName="CodSoc" />
+                <ScalarProperty Name="Sociedad" ColumnName="Sociedad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_Casa_Proveedor_SAP">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_Casa_Proveedor_SAP">
+              <MappingFragment StoreEntitySet="VSP_Casa_Proveedor_SAP">
+                <ScalarProperty Name="LIFNR" ColumnName="LIFNR" />
+                <ScalarProperty Name="KUNNR" ColumnName="KUNNR" />
+                <ScalarProperty Name="NAME1" ColumnName="NAME1" />
+                <ScalarProperty Name="BUKRS" ColumnName="BUKRS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_CASA_SAP">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_CASA_SAP">
+              <MappingFragment StoreEntitySet="VSP_CASA_SAP">
+                <ScalarProperty Name="COD_CASA" ColumnName="COD_CASA" />
+                <ScalarProperty Name="CASA" ColumnName="CASA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_DatosUsuarios">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_DatosUsuarios">
+              <MappingFragment StoreEntitySet="VSP_DatosUsuarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="id_sociedad" ColumnName="id_sociedad" />
+                <ScalarProperty Name="nombre_sociedad" ColumnName="nombre_sociedad" />
+                <ScalarProperty Name="id_centro" ColumnName="id_centro" />
+                <ScalarProperty Name="nombre_centro" ColumnName="nombre_centro" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_MATERIALES_CASAS">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_MATERIALES_CASAS">
+              <MappingFragment StoreEntitySet="VSP_MATERIALES_CASAS">
+                <ScalarProperty Name="MATNR" ColumnName="MATNR" />
+                <ScalarProperty Name="MAKTX" ColumnName="MAKTX" />
+                <ScalarProperty Name="MATKL" ColumnName="MATKL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_PROVEEDORES_SAP">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_PROVEEDORES_SAP">
+              <MappingFragment StoreEntitySet="VSP_PROVEEDORES_SAP">
+                <ScalarProperty Name="MANDT" ColumnName="MANDT" />
+                <ScalarProperty Name="KUNNR" ColumnName="KUNNR" />
+                <ScalarProperty Name="LIFNR" ColumnName="LIFNR" />
+                <ScalarProperty Name="SORTL" ColumnName="SORTL" />
+                <ScalarProperty Name="NAME1" ColumnName="NAME1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_ReporteLogs1">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_ReporteLogs1">
+              <MappingFragment StoreEntitySet="VSP_ReporteLogs1">
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Cod_Prod_SAP" ColumnName="Cod_Prod_SAP" />
+                <ScalarProperty Name="Nombre_Segun_Proveedor" ColumnName="Nombre_Segun_Proveedor" />
+                <ScalarProperty Name="Cantidad_Solicitada" ColumnName="Cantidad_Solicitada" />
+                <ScalarProperty Name="Cantidad_Enviar" ColumnName="Cantidad_Enviar" />
+                <ScalarProperty Name="Saldo_SAP" ColumnName="Saldo_SAP" />
+                <ScalarProperty Name="Sociedad" ColumnName="Sociedad" />
+                <ScalarProperty Name="Nombre_Cliente" ColumnName="Nombre_Cliente" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_ReporteLogsCanjes">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_ReporteLogsCanjes">
+              <MappingFragment StoreEntitySet="VSP_ReporteLogsCanjes">
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Cod_Prod_SAP" ColumnName="Cod_Prod_SAP" />
+                <ScalarProperty Name="Nombre_SAP" ColumnName="Nombre_SAP" />
+                <ScalarProperty Name="Nombre_Segun_Proveedor" ColumnName="Nombre_Segun_Proveedor" />
+                <ScalarProperty Name="Cantidad_Solicitada" ColumnName="Cantidad_Solicitada" />
+                <ScalarProperty Name="Cantidad_Enviar" ColumnName="Cantidad_Enviar" />
+                <ScalarProperty Name="Saldo_SAP" ColumnName="Saldo_SAP" />
+                <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
+                <ScalarProperty Name="Mensaje1" ColumnName="Mensaje1" />
+                <ScalarProperty Name="Mensaje2" ColumnName="Mensaje2" />
+                <ScalarProperty Name="Mensaje3" ColumnName="Mensaje3" />
+                <ScalarProperty Name="Mensaje4" ColumnName="Mensaje4" />
+                <ScalarProperty Name="Sociedad" ColumnName="Sociedad" />
+                <ScalarProperty Name="CENTRO" ColumnName="CENTRO" />
+                <ScalarProperty Name="Nombre_Cliente" ColumnName="Nombre_Cliente" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_convertir_fecha" FunctionName="AUTCANJESModel.Store.sp_convertir_fecha" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP_Delete" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP_Delete" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP_delete2" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP_delete2" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP_update" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP_update" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP_update1" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP_update1" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP_update2" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP_update2" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP_update2_1" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP_update2_1" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP_update2_2" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP_update2_2" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP_update3" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP_update3" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP_update4" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP_update4" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_EncabezadoSAP" FunctionName="AUTCANJESModel.Store.sp_TBL_EncabezadoSAP" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_EncabezadoSAP_cambio_status1" FunctionName="AUTCANJESModel.Store.sp_TBL_EncabezadoSAP_cambio_status1" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_EncabezadoSAP_cambio_status2" FunctionName="AUTCANJESModel.Store.sp_TBL_EncabezadoSAP_cambio_status2" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_EncabezadoSAP_cambio_status3" FunctionName="AUTCANJESModel.Store.sp_TBL_EncabezadoSAP_cambio_status3" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_EncabezadoSAP_Delete" FunctionName="AUTCANJESModel.Store.sp_TBL_EncabezadoSAP_Delete" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_EncabezadoSAP_update" FunctionName="AUTCANJESModel.Store.sp_TBL_EncabezadoSAP_update" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_MaestrosCanjes_create" FunctionName="AUTCANJESModel.Store.sp_TBL_MaestrosCanjes_create" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_MaestrosCanjes_EliminarMasivo" FunctionName="AUTCANJESModel.Store.sp_TBL_MaestrosCanjes_EliminarMasivo" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_DetalleSAP2" FunctionName="AUTCANJESModel.Store.sp_TBL_DetalleSAP2" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_MaestroCanjes_cambio_nombreSAP" FunctionName="AUTCANJESModel.Store.sp_TBL_MaestroCanjes_cambio_nombreSAP" />
+          <EntitySetMapping Name="TBL_DetalleSAP">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_DetalleSAP">
+              <MappingFragment StoreEntitySet="TBL_DetalleSAP">
+                <ScalarProperty Name="Particion" ColumnName="Particion" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="Mensaje4" ColumnName="Mensaje4" />
+                <ScalarProperty Name="Mensaje3" ColumnName="Mensaje3" />
+                <ScalarProperty Name="Mensaje2" ColumnName="Mensaje2" />
+                <ScalarProperty Name="Mensaje1" ColumnName="Mensaje1" />
+                <ScalarProperty Name="DOCUMENT_YEAR" ColumnName="DOCUMENT_YEAR" />
+                <ScalarProperty Name="DOCUMENT_SAP" ColumnName="DOCUMENT_SAP" />
+                <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
+                <ScalarProperty Name="FECHA_CAD" ColumnName="FECHA_CAD" />
+                <ScalarProperty Name="LOTE" ColumnName="LOTE" />
+                <ScalarProperty Name="ALMACEN" ColumnName="ALMACEN" />
+                <ScalarProperty Name="CENTRO" ColumnName="CENTRO" />
+                <ScalarProperty Name="Cantidad_Enviar" ColumnName="Cantidad_Enviar" />
+                <ScalarProperty Name="Saldo_SAP" ColumnName="Saldo_SAP" />
+                <ScalarProperty Name="Cantidad_Solicitada" ColumnName="Cantidad_Solicitada" />
+                <ScalarProperty Name="Nombre_Segun_Proveedor" ColumnName="Nombre_Segun_Proveedor" />
+                <ScalarProperty Name="Cod_Prod_SAP" ColumnName="Cod_Prod_SAP" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VSP_ReporteLogs">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_ReporteLogs">
+              <MappingFragment StoreEntitySet="VSP_ReporteLogs">
+                <ScalarProperty Name="DOCUMENT_YEAR" ColumnName="DOCUMENT_YEAR" />
+                <ScalarProperty Name="Fecha_Migo" ColumnName="Fecha_Migo" />
+                <ScalarProperty Name="DOCUMENT_SAP" ColumnName="DOCUMENT_SAP" />
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="Fecha_Autorizacion" ColumnName="Fecha_Autorizacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+                <ScalarProperty Name="nombre_centro" ColumnName="nombre_centro" />
+                <ScalarProperty Name="CENTRO" ColumnName="CENTRO" />
+                <ScalarProperty Name="nombre_sociedad" ColumnName="nombre_sociedad" />
+                <ScalarProperty Name="Sociedad" ColumnName="Sociedad" />
+                <ScalarProperty Name="Mensaje4" ColumnName="Mensaje4" />
+                <ScalarProperty Name="Mensaje3" ColumnName="Mensaje3" />
+                <ScalarProperty Name="Mensaje2" ColumnName="Mensaje2" />
+                <ScalarProperty Name="Mensaje1" ColumnName="Mensaje1" />
+                <ScalarProperty Name="UNIDAD" ColumnName="UNIDAD" />
+                <ScalarProperty Name="Saldo_SAP" ColumnName="Saldo_SAP" />
+                <ScalarProperty Name="Cantidad_Enviar" ColumnName="Cantidad_Enviar" />
+                <ScalarProperty Name="Cantidad_Solicitada" ColumnName="Cantidad_Solicitada" />
+                <ScalarProperty Name="Nombre_Segun_Proveedor" ColumnName="Nombre_Segun_Proveedor" />
+                <ScalarProperty Name="Nombre_SAP" ColumnName="Nombre_SAP" />
+                <ScalarProperty Name="Cod_Prod_SAP" ColumnName="Cod_Prod_SAP" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_LOGERROR" FunctionName="AUTCANJESModel.Store.sp_LOGERROR" />
+          <EntitySetMapping Name="TBL_LOGERROR">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_LOGERROR">
+              <MappingFragment StoreEntitySet="TBL_LOGERROR">
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="MESSAGE_ERROR" ColumnName="MESSAGE_ERROR" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBL_MaterialesSAP">
+            <EntityTypeMapping TypeName="AUTCANJESModel.TBL_MaterialesSAP">
+              <MappingFragment StoreEntitySet="TBL_MaterialesSAP">
+                <ScalarProperty Name="MATLAB" ColumnName="MATLAB" />
+                <ScalarProperty Name="MAKTX" ColumnName="MAKTX" />
+                <ScalarProperty Name="MATNR" ColumnName="MATNR" />
+                <ScalarProperty Name="MATKL" ColumnName="MATKL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_TBL_MaterialesSAP_Insert1" FunctionName="AUTCANJESModel.Store.sp_TBL_MaterialesSAP_Insert1" />
+          <FunctionImportMapping FunctionImportName="sp_TBL_MaterialesSAP_Update1" FunctionName="AUTCANJESModel.Store.sp_TBL_MaterialesSAP_Update1" />
+          <EntitySetMapping Name="VSP_CLIENTE_X_SOCIEDAD_SAP">
+            <EntityTypeMapping TypeName="AUTCANJESModel.VSP_CLIENTE_X_SOCIEDAD_SAP">
+              <MappingFragment StoreEntitySet="VSP_CLIENTE_X_SOCIEDAD_SAP">
+                <ScalarProperty Name="SOCIEDAD_CLIENTE" ColumnName="SOCIEDAD_CLIENTE" />
+                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+                <ScalarProperty Name="CODIGO_CLIENTE" ColumnName="CODIGO_CLIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

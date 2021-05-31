@@ -1,0 +1,545 @@
+﻿@model IEnumerable<CANJES.Models.VSP_Autorizaciones_Detalle>
+@{ ViewBag.Title = "Autorizacion de Documentos"; }
+
+@Html.Hidden("Cod_Prov_SAP", new { @values = ViewBag.Cod_Prov_SAP })
+@Html.Hidden("Cod_Casa_SAP", new { @values = ViewBag.Cod_Casa_SAP })
+@Html.Hidden("Cod_Cliente_SAP", new { @values = ViewBag.Cod_Cliente_SAP })
+@Html.Hidden("Sociedad", new { @values = ViewBag.Sociedad })
+@Html.Hidden("Centro", new { @values = ViewBag.Centro })
+@Html.Hidden("Cliente", new { @values = ViewBag.Cliente })
+
+<h2 class="col-md-6 center">Autorizaciones de Documentos</h2>
+<br />
+
+@************ Sección Encabezado ************@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b><label class="col-md-6">Documento</label></b>
+                    <div class="col-md-12">
+                        @Html.Editor("Documento", new { htmlAttributes = new { @value = ViewBag.Documento, @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b><label class="col-md-6">Sociedad</label></b>
+                    <div class="col-md-12">
+                        @Html.Editor("NSociedad", new { htmlAttributes = new { @value = ViewBag.NSociedad, @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b><label class="col-md-6">Casa</label></b>
+                    <div class="col-md-12">
+                        @Html.Editor("Casa", new { htmlAttributes = new { @value = ViewBag.Casa, @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b><label class="col-md-6">Cliente Tipo Proveedor</label></b>
+                    <div class="col-md-12">
+                        @Html.Editor("Proveedor", new { htmlAttributes = new { @value = ViewBag.Proveedor, @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b><label class="col-md-6">Observaciones</label></b>
+                    <div class="col-md-12">
+                        @Html.Editor("Observaciones", new { htmlAttributes = new { @value = ViewBag.Observaciones, @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b><label class="col-md-6">Cliente</label></b>
+                    <div class="col-md-12">
+                        @Html.Editor("Cod_Cliente_SAP", new { htmlAttributes = new { @value = ViewBag.Cod_Cliente_SAP, @class = "form-control", @readonly = "readonly" } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b><label class="col-md-12">Solicitante</label></b>
+                    <div class="col-md-12">
+                        <input type="text" name="Solicitante" value=@ViewBag.Cliente id="Solicitante" class="form-control" required  />
+                        
+                        <input type="button" class="btn btn-info" value="Validar Datos" id="cm" />
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b><label class="col-md-12">Solicitante Nombre</label></b>
+                    <div class="col-md-12">
+                        <input type="text" name="nombre_solicitante" id="nombre_solicitante" value="@ViewBag.nombre_cliente" class = "form-control"  required readonly />
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br />
+    </div>
+</div>
+@************ Fin Sección Encabezado ************@
+
+@*Formulario modal agregado al 05042021*@
+<div class="modal fade modalEditClass" id="modalEdit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold text-secondary ml-5" style="color: rebeccapurple;">Modificar Cantidad</h4>
+                <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="formNameEdit">Documento</label>
+                    <input type="text" id="formDocumento" class="form-control validate" readonly>
+                </div>
+
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="formNameEdit">Código Material</label>
+                    <input type="text" id="formCodMaterial" class="form-control validate" readonly>
+                </div>
+
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="formDisponibleEdit">Cantidad</label>
+                    <input type="text" id="formCantidad" class="form-control validate">
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center editInsideWrapper">
+                <button class="btn btn-success btn-block editInside" data-dismiss="modal" id="Editar" onclick="return Editar();">
+                    Guardar
+                    <i class="fas fa-paper-plane-o ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@*hasta aqui*@
+
+<table class="table table-responsive" id="tabla">
+    <thead>
+        <tr>
+            <th hidden>
+                Documento
+            </th>
+            <th>
+                Código Material
+            </th>
+            <th>
+                Material
+            </th>
+            <th>
+                Cantidad Solicitada
+            </th>
+            <th>Cantidad a Enviar</th>
+            <th hidden>Saldo</th>
+            <th hidden>Lote</th>
+            <th hidden>Fecha Caducidad</th>
+            <th hidden>Partición Lote</th>
+            <th hidden>Existencia en SAP</th>
+            <th hidden>Apto para Canje</th>
+            <th hidden>Canjeable</th>
+            <th>Botones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td hidden>
+        @Html.DisplayFor(modelItem => item.Documento)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cod_Prod_SAP)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MAKTX)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cantidad_Solicitada)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cantidad_Enviar)
+    </td>
+    <td hidden>
+        @Html.DisplayFor(modelItem => item.Saldo_SAP)
+    </td>
+    <td hidden>
+        @Html.DisplayFor(modelItem => item.LOTE)
+    </td>
+    <td hidden>
+        @Html.DisplayFor(modelItem => item.FECHA_CAD)
+    </td>
+    <td hidden>
+        @Html.DisplayFor(modelItem => item.Particion)
+    </td>
+    <td hidden>
+        @Html.DisplayFor(modelItem => item.Mensaje1)
+    </td>
+    <td hidden>
+        @Html.DisplayFor(modelItem => item.Mensaje2)
+    </td>
+    <td hidden>
+        @Html.DisplayFor(modelItem => item.Mensaje3)
+    </td>
+    <td>
+        @Html.ActionLink("Eliminar Material", "Delete_Detalle", new { Documento = item.Documento, Material = item.Cod_Prod_SAP }, htmlAttributes: new { title = "Eliminar Material", @style = "color: white;", @class = "btn btn-danger btn-rounded btn-sm buttonEdit", @onclick = "return Confirmar1();" }) |
+        @*<button class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" data-target="#modalEdit" />Editar cantidad <a><i class="fas fa-edit ml-1 text-white"></i></a>*@
+        <input type="button" value="Editar cantidad" class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" data-target="#modalEdit" /><a><i class="fas fa-edit ml-1 text-white"></i></a>
+    </td>
+</tr>}
+    </tbody>
+</table>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <b><label class="col-md-6">Meses para el canje</label></b>
+                    <div class="col-md-12">
+                        @Html.Editor("Meses", new { htmlAttributes = new { @value = ViewBag.Meses, @class = "form-control", @min = "1", @max = "10" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+
+@*<hr style="outline-color: blue" />*@
+<div class="form-group">
+    <div class="col-md-12">
+        <a href="@Url.Action("Index", "TBL_EncabezadoSAP" )"><i class="fas fa-arrow-circle-left"></i> Regresar a listado</a> |
+        <input type="button" class="btn btn-info" name="Validar" id="Validar" value="Validar Datos" onclick="return Procesar();" /> |
+        <input type="button" class="btn btn-success" name="Autorizar" id="Autorizar" value="Procesar" onclick="return Autorizar();" />
+    </div>
+</div>
+
+@if (ViewBag.Requisitos == "N")
+{
+<script type="text/javascript">
+    window.onload = function () {
+        swal({
+            title: "¡Error!",
+            text: "¡No cumple las condiciones!",
+            icon: "error", //built in icons: success, warning, error, info
+            timer: 5000, //timeOut for auto-close
+        });
+    };
+</script>}
+
+@if (ViewBag.Evaluado == "Y")
+{
+<script type="text/javascript">
+    window.onload = function () {
+        swal({
+            title: "¡Advertencia!",
+            text: "¡El documento ya fue validado!",
+            icon: "warning", //built in icons: success, warning, error, info
+            timer: 5000, //timeOut for auto-close
+        });
+    };
+</script>}
+
+@if (ViewBag.Procesado == "Y")
+{
+<script type="text/javascript">
+    window.onload = function () {
+        swal({
+            title: "¡Validado!",
+            text: "¡Se valido correctamente! Dele click en procesar",
+            icon: "success", //built in icons: success, warning, error, info
+            timer: 5000, //timeOut for auto-close
+        });
+    };
+</script>}
+
+@if (ViewBag.Errores == "Y")
+{
+<script type="text/javascript">
+    window.onload = function () {
+        swal({
+            title: "¡Invalidado!",
+            text: "¡Se econtraron varios invalidantes en el documento! Dar click en Exportar a Excel...",
+            icon: "error", //built in icons: success, warning, error, info
+            timer: 5000, //timeOut for auto-close
+        });
+    };
+</script>}
+
+@if (ViewBag.Sin_Detalle == "Y")
+{
+<script type="text/javascript">
+    window.onload = function () {
+        swal({
+            title: "¡Error!",
+            text: "¡No hay Detalles!",
+            icon: "error", //built in icons: success, warning, error, info
+            timer: 5000, //timeOut for auto-close
+        });
+    };
+</script>}
+
+@if (ViewBag.Sin_Canje == "Y")
+{
+<script type="text/javascript">
+    window.onload = function () {
+        swal({
+            title: "¡Error!",
+            text: "¡No hay Canjes Disponibles!",
+            icon: "error", //built in icons: success, warning, error, info
+            timer: 5000, //timeOut for auto-close
+        });
+    };
+</script>}
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js\"></script>
+    <link href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    
+
+
+    <script type="text/javascript">
+        $(Document).ready(function () {
+
+
+            $('#tabla').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": true,
+                "pagingType": "full_numbers",
+                "searching": true,
+                "pageLength": 5,
+                //Lenguaje:
+                "language": {
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                    },
+                    "info": "Mostrar Entradas de _START_ a _TOTAL_",
+                    "infoEmpty": "Total de Entradas 0",
+                    "infoFiltered": "Filtrado de _MAX_ entradas totales",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "search": "Filtrar"
+                },
+                //"fixedColumns": false,
+                //"scrollCollapse": true,
+                //"scrollY": "300px",
+                //"scrollX": true
+                //,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="far fa-file-excel"></i> Exportar a excel',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="far fa-file-pdf" title= "Guardar como PDF"></i> Pdf',
+                        orientation: 'landscape',
+                        pageSize: 'LEGAL',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="fas fa-file-csv" title= "Guardar como CSV"></i> CSV',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="fas fa-print"></i> Imprimir tabla',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        }
+                    }
+                ]
+            });
+        });
+
+        function Confirmar1() {
+            if (window.confirm("¿Desea confirmar la solicitud?") == true) {
+                return true;
+            }
+            else {
+                alert("¡La acción ha sido cancelada!");
+                return false;
+            }
+        };
+
+        $('#Solicitante').on('change', function () {
+            debugger;
+            $('#nombre_solicitante').val('');
+
+        });
+
+        $('#cm').on('click',async function () {
+            var myHeaders = new Headers();
+            console.log($('#Solicitante').val());
+            console.log($('#Sociedad').val());
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append('Accept', 'application/json');
+            myHeaders.append('Origin', 'http://172.16.2.128:8991');
+            var raw = JSON.stringify({ "codigo_cliente": $('#Solicitante').val(), "sociedad": $('#Sociedad').val() });
+
+
+            //var raw = JSON.stringify({ "codigo_cliente": "100010", "sociedad": "1200" });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                mode: 'cors',
+                body: raw,
+                redirect: 'follow'
+            };
+            try {
+
+                
+                debugger;
+                const res = await fetch("http://172.16.2.128:8991/api/Automatizacion/nombre_cliente", requestOptions);
+                const json = await res.json();
+                
+                $('#nombre_solicitante').val(json.nombre_cliente);
+
+
+
+                
+            } catch (error) {
+                console.error(error);
+                
+                // expected output: ReferenceError: nonExistentFunction is not defined
+                // Note - error messages will vary depending on browser
+            }
+
+            
+
+        });
+
+        $('#tabla tr').on('click', function () {
+            var documento = $(this).find('td:nth-child(1)').html();
+            var material = $(this).find('td:nth-child(2)').html();
+            var cantidad = $(this).find('td:nth-child(4)').html();
+
+            $("#formDocumento").val(documento.trim());
+            $("#formCodMaterial").val(material.trim());
+            $("#formCantidad").val(cantidad.trim());
+        });
+
+        $("#formCantidad").bind('keypress', function (event) {
+            var regex = new RegExp("^[0-9]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        function Editar()
+        {
+            var documento = $("#formDocumento").val();
+            var material = $("#formCodMaterial").val();
+            var cantidad = $("#formCantidad").val();
+
+            if (cantidad == "" || cantidad == null || cantidad == 0) {
+                swal({
+                    title: "Error al procesar",
+                    text: "¡La cantidad debe tener un valor y debe ser distinto a cero!",
+                    icon: "error", //built in icons: success, warning, error, info
+                    timer: 5000, //timeOut for auto-close
+                });
+            }
+            else
+            {
+                location.href = '@Url.Action("Edit_Detalle","TBL_EncabezadoSAP")?Documento=' + documento + '&Material=' + material + '&Cantidad=' + cantidad;
+            }
+        }
+
+
+        function Procesar()
+
+        {
+            debugger;
+            var centro = $("#Centro").val();
+            var cod_prov_sap = $("#Cod_Prov_SAP").val();
+            var cod_casa_sap = $("#Cod_Casa_SAP").val();
+            var Cod_Cliente_SAP = $("#Cod_Cliente_SAP").val();
+            var sociedad = $("#Sociedad").val();
+            var documento = $("#Documento").val();  
+            var meses = $("#Meses").val();
+            var cliente = $("#Solicitante").val();
+
+            if (window.confirm("¿Deseá validar los datos?") == true) {
+
+                if (centro == "") {
+                    swal({
+                        title: "Error al procesar",
+                        text: "¡Tiene que seleccionar un centro!",
+                        icon: "error", //built in icons: success, warning, error, info
+                        timer: 5000, //timeOut for auto-close
+                    });
+                    return false;
+                }
+                else if (meses == 0) {
+                    swal({
+                        title: "Error al procesar",
+                        text: "¡El valor del mes tiene que ser superior a cero(0)!",
+                        icon: "error", //built in icons: success, warning, error, info
+                        timer: 5000, //timeOut for auto-close
+                    });
+                    return false;
+                }
+                else
+                {
+                    location.href = '@Url.Action("Autorizar", "TBL_EncabezadoSAP")?Documento=' + documento + '&Cod_Prov_SAP=' + cod_prov_sap + '&Cod_Cliente_SAP=' + Cod_Cliente_SAP + '&Cod_Casa_SAP=' + cod_casa_sap + '&Sociedad=' + sociedad + '&Centro=' + centro + '&Meses=' + meses + '&Cliente=' + cliente;
+                    return true;
+                }
+            }
+            else {
+                alert("¡La acción ha sido cancelada!");
+                return false;
+            }
+        }
+
+        function Autorizar()
+        {
+            var documento = $("#Documento").val();
+            if (window.confirm("¿Deseá autorizar la solicitud?") == true) {
+                location.href = '@Url.Action("Confirmar", "TBL_EncabezadoSAP")?Documento=' + documento;
+                return true;
+            }
+            else
+            {
+                alert("¡La acción ha sido cancelada!");
+                return false;
+            }
+        }
+
+    </script>
+}

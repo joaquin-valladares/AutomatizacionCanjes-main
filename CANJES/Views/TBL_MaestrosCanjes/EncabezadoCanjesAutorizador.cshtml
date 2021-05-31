@@ -1,0 +1,118 @@
+﻿@*@model CANJES.Models.ClsReporteLogs*@
+
+@{
+    ViewBag.Title = "Listado de canjes pendientes de autorización";
+}
+
+@*datatables*@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+
+<h2 class="text-primary">@ViewBag.Title</h2>
+<hr />
+<div class="container">
+    <div class="mt-3 mb-3">
+        <a href="@Url.Action("RequisaEncabezado", "VSP_Sociedades_Centros_Almacenes" )"><i class="fas fa-arrow-circle-left"></i> Ir al historial de requisas</a>
+    </div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-row">
+                        <label class="col-md-12 ml-2 text-primary"><span class="badge badge-pill badge-secondary">1</span> id documento</label>
+                    </div>
+                    <input class="form-control" value="" readonly />
+                </div>
+                <div class="col-md-6">
+                    <div class="form-row">
+                        <label class="col-md-12 ml-2 text-primary"><span class="badge badge-pill badge-secondary">2</span> Mensaje</label>
+                    </div>
+                    <input class="form-control" value="" readonly />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <div class="form-row">
+                        <label class="col-md-12 ml-2 text-primary"><span class="badge badge-pill badge-secondary">3</span> costo total</label>
+                    </div>
+                    <input class="form-control" value="" readonly />
+                </div>
+                <div class="col-md-6">
+                    <div class="form-row">
+                        <label class="col-md-12 ml-2 text-primary"><span class="badge badge-pill badge-secondary">4</span> Saldo sap</label>
+                    </div>
+                    <input class="form-control" value="" readonly />
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <button class="btn btn-dark btn-block">Autorizar canje</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="c-table">
+        <div class="table-responsive table-stripered ctable-hijo">
+            <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                        <th>campo1</th>
+                        <th>campo2</th>
+                        <th>campo3</th>
+                        <th>campo4</th>
+                        <th>campo5</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>valor1</td>
+                        <td>valor2</td>
+                        <td>valor3</td>
+                        <td>valor4</td>
+                        <td>valor5</td>
+                        <td>
+                            @*@Html.ActionLink("", "AutorizarCanje", null, new { id_requisa = item.Id_Requisa }, htmlAttributes: new { @class = "btn btn-info fas fa-eye" })
+                                @Html.ActionLink("", "EliminarCanje", null, new { id_requisa = item.Id_Requisa }, htmlAttributes: new { @class = "btn btn-info fas fa-trash-alt" })*@
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        </table>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+    @*para iniciar el datatable*@
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                "language": {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "Datos no encontrados",
+                    "info": "Mostrando Página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                    "search": "Buscar",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                }
+            });
+        });
+    </script>
+}
+

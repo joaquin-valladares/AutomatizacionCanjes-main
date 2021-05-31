@@ -1,0 +1,260 @@
+﻿@model IEnumerable<CANJES.Models.Cls_ModelMateriales>
+@{
+    ViewBag.Title = "Materiales";
+}
+
+<h2>Materiales</h2>
+<br />
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.DropDownList("Casa", new SelectList(ViewBag.Casa, "Value", "Text"), "---Seleccione Casa---", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="button" class="btn btn-success" id="Registro" value="Poblar tabla de materiales" onclick="return Registrar_Masiva();" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+</div>
+
+@*Formulario modal agregado al 24042021*@
+<div class="modal fade modalEditClass" id="modalEdit" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold text-secondary ml-5" style="color: rebeccapurple;">Editar formulario</h4>
+                <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="formCASAEdit">Código casa</label>
+                    <input type="text" id="formMATKLEdit" class="form-control validate" readonly>
+                </div>
+
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="formNameEdit">Código material</label>
+                    <input type="text" id="formMATNREdit" class="form-control validate" readonly>
+                </div>
+
+                <div class="md-form mb-5">
+                    <label data-error="wrong" data-success="right" for="formCASAEdit">Material Laboratorio</label>
+                    <input type="text" id="formMATLABEdit" class="form-control validate">
+                </div>
+            </div>
+            <div class="modal-footer d-flex justify-content-center editInsideWrapper">
+                <button class="btn btn-success btn-block editInside" data-dismiss="modal" id="Editar" onclick="return Modificar_Material();">
+                    Guardar
+                    <i class="fas fa-paper-plane-o ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@*hasta aqui*@
+
+<table class="table table-responsive-lg" id="tabla">
+    <thead>
+        <tr>
+            <th hidden>MATKL</th>
+            <th hidden>MATNR</th>
+            <th>
+                Nombre de Material SAP
+            </th>
+            <th>
+                Nombre de Material Laboratorio
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.MATKL)
+                </td>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.MATNR)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MAKTX)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MATLAB)
+                </td>
+                <td>
+                    <div class="text-center buttonEditWrapper">
+                        <button class="btn btn-info btn-rounded btn-sm buttonEdit" data-toggle="modal" data-target="#modalEdit" />Editar Material <a><i class="fas fa-edit ml-1 text-white"></i></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (ViewBag.Registro_Masivo == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Exitoso!",
+                text: "¡Materiales Registrados!",
+                icon: "success", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.ErrorRM == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Se produjo un error en el registro masivo!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js\"></script>
+    <link href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(Document).ready(function () {
+            $('#tabla').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": true,
+                "pagingType": "full_numbers",
+                "searching": true,
+                "pageLength": 5,
+                //Lenguaje:
+                "language": {
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                    },
+                    "info": "Mostrar Entradas de _START_ a _TOTAL_",
+                    "infoEmpty": "Total de Entradas 0",
+                    "infoFiltered": "Filtrado de _MAX_ entradas totales",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "search": "Filtrar"
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="far fa-file-excel"></i> Exportar a excel',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="far fa-file-pdf" title= "Guardar como PDF"></i> Pdf',
+                        orientation: 'landscape',
+                        pageSize: 'LEGAL',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="fas fa-file-csv" title= "Guardar como CSV"></i> CSV',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="fas fa-print"></i> Imprimir tabla',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3]
+                        }
+                    }
+                ]
+            });
+        });
+
+        $('#tabla tr').on('click', function () {
+            var MATKL = $(this).find('td:nth-child(1)').html();
+            var MATNR = $(this).find('td:nth-child(2)').html();
+            var MATLAB = $(this).find('td:nth-child(4)').html();
+
+            $("#formMATKLEdit").val(MATKL.trim());
+            $("#formMATNREdit").val(MATNR.trim());
+            $("#formMATLABEdit").val(MATLAB.trim());
+        });
+
+        function Modificar_Material()
+        {
+            var MATKL = $("#formMATKLEdit").val();
+            var MATNR = $("#formMATNREdit").val();
+            var MATLAB = $("#formMATLABEdit").val();
+
+            if (MATLAB == "" || MATLAB == null || MATLAB == 0) {
+                swal({
+                    title: "Error al procesar",
+                    text: "¡El campo material laboratorio es requerido!",
+                    icon: "error", //built in icons: success, warning, error, info
+                    timer: 5000, //timeOut for auto-close
+                });
+            }
+            else
+            {
+                location.href = '@Url.Action("ModificarMaterial", "TBL_MaterialesSAP")?MATKL=' + MATKL + '&MATNR=' + MATNR + '&MATLAB=' + MATLAB;
+            }
+        }
+
+        function Registrar_Masiva()
+        {
+            if (window.confirm("¿Desea confirmar la solicitud?") == true) {
+                 location.href = '@Url.Action("Registro_Masivo", "TBL_MaterialesSAP")';
+                return true;
+            }
+            else {
+                swal({
+                    title: "¡Aviso!",
+                    text: "¡La acción ha sido cancelada!",
+                    icon: "warning", //built in icons: success, warning, error, info
+                    timer: 5000, //timeOut for auto-close
+                });
+                return false;
+            }
+        }
+
+        $("#Casa").bind("change", function () {
+            var MATKL = $('select[id=Casa]').val();
+            MATKL = MATKL.toString();
+            location.href = '@Url.Action("Materiales", "TBL_MaterialesSAP")?matkl=' + MATKL;
+        });
+
+    </script>
+}

@@ -1,0 +1,55 @@
+﻿@model CANJES.Models.ViewModels.ClsRecoveryPassViewModel
+
+@{
+    ViewBag.Title = "Recovery";
+    Layout = null;
+}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<div class="container mt-5">
+
+    <div class="row mt-3">
+        <div class="col-md-6 offset-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-horizontal">
+                        <form action="@Url.Content("~/Access/Recovery")" method="post">
+                            @Html.HiddenFor(d => d.token)
+                            <label>Ingresa tu nueva contraseña:</label>
+                            @Html.PasswordFor(d => d.password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(d => d.password, null, new { @class = "text-danger" })
+
+                            <label>Confirma tu nueva contraseña:</label>
+                            @Html.PasswordFor(d => d.Confirm_password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(d => d.Confirm_password, null, new { @class = "text-danger" })
+                            <div class="form-group mt-2">
+                                <button class="btn btn-block btn-primary">Enviar a mi correo</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ViewBag.Success2 != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                swal({
+                    title: "@ViewBag.Success2",
+                    icon: "info", //built in icons: success, warning, error, info
+                    timer: 5000, //timeOut for auto-close
+                });
+            };
+    </script>
+}
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

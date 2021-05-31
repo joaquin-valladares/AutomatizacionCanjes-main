@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Canjes</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    @*para sweetalert*@
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+</head>
+<body>
+    @*para el header que solo lleva las imagenes*@
+    <nav class="navbar  bg-footerKielsa ">
+        <div class="collapse navbar-collapse container" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="@Url.Action("Dashboard", "Home")">
+                @*<img src="@Url.Content("~/Images/Logo-Grupo-Farinter-01.png")" class="img-fluid mb-3" alt="Responsive image" width='140px' />*@
+                <img src="@Url.Content("~/Images/LOGO FARINTER BLANCO.png")" class="img-fluid mb-3" alt="Responsive image" width='140px' />
+            </a>
+            <form class="form-inline my-2 my-lg-0">
+                <img src="@Url.Content("~/Images/canje.png")" class="img-fluid" width='140px' alt="Responsive imagez" />
+            </form>
+        </div>
+    </nav>
+    @*para el navbar que lleva los enlaces*@
+    <nav class="navbar navbar-expand-lg navbar-light mb-3">
+        <section class="container">
+            <a class="navbar-brand text-primary" href="@Url.Action("Dashboard", "Home")">Inicio</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    @*<li class="list-unstyled">*@
+                    @*<a class="navbar-brand text-primary" href="@Url.Action("CargarDatosExcel", "TBL_MaestrosCanjes")">Mantenimiento y carga de datos</a>
+        <a class="navbar-brand text-primary" href="@Url.Action("EncabezadoCanjes", "TBL_MaestrosCanjes")">Tus canjes registrados</a>*@
+                    @*</li>*@
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle text-primary btn-drop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Mantenimiento
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="@Url.Action("Index", "TBL_Casa_Proveedor_SAP")">Listado de Casas x Proveedor</a>
+                            <a class="dropdown-item" href="@Url.Action("Materiales", "TBL_MaterialesSAP")">Recargar Tabla de Materiales</a>
+                            <a class="dropdown-item" href="@Url.Action("CargaMasiva", "TBL_MaterialesSAP")">Actualizar Materiales Según Laboratorio</a>
+                            <a class="dropdown-item" href="@Url.Action("MaestrodeCanjes", "TBL_MaestrosCanjes")">Materiales según proveedor</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle text-primary btn-drop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Canjes
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="@Url.Action("Index", "VSP_Casa_ClientePrv_Sociedad")">Carga de Archivo Excel</a>
+                            <a class="dropdown-item" href="@Url.Action("Index", "TBL_EncabezadoSAP")">Salida de Canjes</a>
+                            <a class="dropdown-item" href="@Url.Action("Documentos_Generados", "VSP_Casa_ClientePrv_Sociedad")">Autorización de Salida</a>
+                            <a class="dropdown-item" href="@Url.Action("Documentos_Autorizados", "VSP_Casa_ClientePrv_Sociedad")">Procesamiento de Salida</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle text-primary btn-drop" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Administración
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="@Url.Action("Index", "TBL_UsuariosCanjes")">Gestión de Usuarios</a>
+                        </div>
+                    </div>
+                    <a class="navbar-brand text-primary" href="@Url.Action("Index", "VSP_ReporteLogs")">Reporte de Logs</a>
+                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="btn btn-outline-danger btn-right mt-1" onclick="userLogOff()"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                }
+            </div>
+        </section>
+    </nav>
+    <div class="container body-content">
+        <hr />
+        @RenderBody()
+    </div>
+
+    <footer class="footer bg-footerKielsa mt-3">
+        <section class="container pt-3">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5 class="text-white text-uppercase font-weigth bold"> Oficinas principales</h5>
+                    <div class="row">
+                        <div class="col-md-5 border-right">
+                            <p class="text-white">
+                                <b>Tegucigalpa, Honduras</b><br />
+                                Edificio Farinter, atrás de la Toyota, <br />
+                                Barrio La Granja <br />
+                                Teléfono:  (+504) 2225-2718 <br />
+                                FAX: (+504) 2225-2732
+                            </p>
+                        </div>
+
+                        <div class="col-md-7">
+                            <p class="text-white">
+                                <b>San Pedro Sula, Honduras</b><br />
+                                Barrio Santa Rosa, segundo anillo periférico 7 y 8 calle SE. <br />
+                                Media cuadra al sur de la iglesia La Luz del Mundo <br />
+                                Teléfono: (+504) 2553-5600
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="text-white text-uppercase font-weigth bold text-informacion">Contáctanos</h5>
+                            <a class="anchor text-white" href="mailto:info@farinter.hn">info@farinter.hn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center text-white">
+                        &copy; @DateTime.Now.Year <b>Farmacéutica Internacional. Todos los Derechos Reservados.</b>
+                    </p>
+                </div>
+            </div>
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <p class="text-left text-white">
+                            V1.0.2
+                        </p>
+                    </div>
+                </div>*@
+        </section>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/DataTables/jquery")
+    @Scripts.Render("~/bundles/DataTables/dataTables")
+    @Scripts.Render("~/bundles/DataTables/buttons")
+    @Scripts.Render("~/bundles/Scripts/sweetalert")
+    @RenderSection("scripts", required: false)
+
+    @*multiselect*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/js/jquery.multi-select.min.js" integrity="sha512-vSyPWqWsSHFHLnMSwxfmicOgfp0JuENoLwzbR+Hf5diwdYTJraf/m+EKrMb4ulTYmb/Ra75YmckeTQ4sHzg2hg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/css/multi-select.css" integrity="sha512-2sFkW9HTkUJVIu0jTS8AUEsTk8gFAFrPmtAxyzIhbeXHRH8NXhBFnLAMLQpuhHF/dL5+sYoNHWYYX2Hlk+BVHQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/css/multi-select.min.css" integrity="sha512-3lMc9rpZbcRPiC3OeFM3Xey51i0p5ty5V8jkdlNGZLttjj6tleviLJfHli6p8EpXZkCklkqNt8ddSroB3bvhrQ==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/multi-select/0.9.12/js/jquery.multi-select.js" integrity="sha512-X1iMoI6a2IoZFOheUVf3ZmcD1L7zN/eVtig6enIq8yBlwDcbPVao/LG8+/SdjcVn72zF+A/viRLPSxfXLu/rbQ==" crossorigin="anonymous"></script>
+
+    <script>
+        function userLogOff() {
+            location.replace("/Home/Logout");
+        }
+    </script>
+</body>
+</html>

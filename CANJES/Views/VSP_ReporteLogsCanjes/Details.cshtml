@@ -1,0 +1,58 @@
+﻿@model CANJES.Models.VSP_ReporteLogsCanjes
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VSP_ReporteLogsCanjes</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UNIDAD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UNIDAD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mensaje1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mensaje1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mensaje2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mensaje2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mensaje3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mensaje3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mensaje4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mensaje4)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

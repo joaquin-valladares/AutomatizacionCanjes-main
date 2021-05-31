@@ -1,0 +1,55 @@
+﻿
+@model CANJES.Models.TBL_UsuariosCanjes
+
+@{
+    ViewBag.Title = "Carga de datos";
+}
+
+<h2 class="text-primary">@ViewBag.Title</h2>
+<hr />
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <form action="../../form-result.php" method="post" enctype="multipart/form-data" target="_blank">
+                <div class="row mb-3">
+                    <div class="col-md-12 mb-3">
+                        @Html.DropDownList("id_casa", new SelectList(string.Empty, "Value", "Text"), "---Seleccione Casa---", htmlAttributes: new { @class = "form-control", maxlength = 150 })
+
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Observaciones" } })
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Cliente" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="file" name="archivosubido" class="btn btn-block" accept=".xls">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="button" value="Registrar canje" class="btn btn-block btn-dark">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Traer información de Sociedades
+            $.getJSON('/TBL_MaestrosCanjes/GetCASAS', function (data) {
+                $.each(data, function () {
+                    $('#id_casa').append('<option value=' +
+                        this.Value + '>' + this.Text + '</option>');
+                });
+            });
+
+        })
+
+    </script>
+}
+

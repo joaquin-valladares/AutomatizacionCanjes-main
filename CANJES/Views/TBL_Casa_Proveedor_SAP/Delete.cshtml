@@ -1,0 +1,62 @@
+﻿@model CANJES.Models.TBL_Casa_Proveedor_SAP
+
+@{
+    ViewBag.Title = "Eliminar Casa/Proveedor SAP";
+}
+
+<h2>Eliminar Registro de Casa Proveedor SAP</h2>
+
+<div>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Cod_Casa_SAP)
+        @Html.HiddenFor(model => model.Cod_Prov_SAP)
+        @Html.HiddenFor(model => model.Cod_Cliente_SAP)
+        @Html.HiddenFor(model => model.Sociedad)
+
+        <dl class="dl-horizontal">
+            <dt class="col-sm-2">
+                @Html.DisplayName("Código de la casa")
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cod_Casa_SAP)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayName("Código del cliente tipo proveedor SAP")
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Cod_Cliente_SAP)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayName("Código de Sociedad")
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Sociedad)
+            </dd>
+        </dl>
+
+        <div class="form-actions no-color">
+            <a href="@Url.Action("Index", "TBL_Casa_Proveedor_SAP" )"><i class="fas fa-arrow-circle-left"></i> Regresar a listado</a> |
+            <input type="submit" id="Eliminar" value="Eliminar" class="btn btn-default" hidden />
+            <input type="button" id="Eliminar2" value="Eliminar" class="btn btn-danger" onclick="return Confirmar1();" />
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        function Confirmar1() {
+            if (window.confirm("¿Deseá confirmar la solicitud?") == true) {
+                $("#Eliminar").click();
+                return true;
+            }
+            else {
+                alert("¡La acción ha sido cancelada!");
+                return false;
+            }
+        }
+    </script>
+    }

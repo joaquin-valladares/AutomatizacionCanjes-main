@@ -1,0 +1,109 @@
+﻿
+@model CANJES.Models.ClsReporteLogs
+
+@{
+    ViewBag.Title = "Reporte de logs";
+}
+
+<h2 class="text-primary">@ViewBag.Title</h2>
+<hr />
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="form-row">
+                <label class="col-md-12 ml-2 text-primary"><span class="badge badge-pill badge-secondary">*</span> Seleccione valores para los filtros:</label>
+            </div>
+            <form action="ReporteLogs/filtrarLista" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @Html.DropDownList("id_sociedad2", new SelectList(string.Empty, "Value", "Text"), "---Seleccione sociedad---", htmlAttributes: new { @class = "form-control", maxlength = 150 })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.DropDownList("id_centro", new SelectList(string.Empty, "Value", "Text"), "---Seleccione centro---", htmlAttributes: new { @class = "form-control", maxlength = 150 })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @Html.DropDownList("id_grupo2", new SelectList(string.Empty, "Value", "Text"), "---Seleccione grupo articulos---", htmlAttributes: new { @class = "form-control", maxlength = 150 })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="text-left">Desde: </label>
+                        <input type="datetime-local" id="Fecha_inicial" name="Fecha_inicial" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="text-left">Hasta: </label>
+                        <input type="datetime-local" id="Fecha_final" name="Fecha_final" class="form-control" />
+                    </div>
+                    <div class="col-md-4" style="margin-top: 1.9rem;">
+                        <button class="btn btn-block btn-dark">Generar reporte</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>campo1</th>
+                <th>campo2</th>
+                <th>campo3</th>
+                <th>campo4</th>
+                <th>campo5</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>valor1</td>
+                <td>valor2</td>
+                <td>valor3</td>
+                <td>valor4</td>
+                <td>valor5</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Traer información de Sociedades
+            $.getJSON('/ReporteLogs/GetSociedades', function (data) {
+                $.each(data, function () {
+                    $('#id_sociedad2').append('<option value=' +
+                        this.Value + '>' + this.Text + '</option>');
+                });
+            });
+
+
+            //Traer información de Centtos
+            $("#id_sociedad2").bind('click', function () {
+                var id = $('select[id=id_sociedad2]').val();
+                $('#id_centro').empty();
+                $('#id_centro').val('');
+
+                $.getJSON('/ReporteLogs/GetCentros', { sociedad_id: id }, function (data) {
+                    $.each(data, function () {
+                        $('#id_centro').append('<option value=' +
+                            this.Value + '>' + this.Text + '</option>');
+                    });
+                });
+            });
+
+            // Traer información de grupo articulos
+            $.getJSON('/ReporteLogs/GetGRUPOPROD', function (data) {
+                $.each(data, function () {
+                    $('#id_grupo2').append('<option value=' +
+                        this.Value + '>' + this.Text + '</option>');
+                });
+            });
+        })
+
+    </script>
+}
+
+

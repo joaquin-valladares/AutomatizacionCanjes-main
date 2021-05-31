@@ -1,0 +1,209 @@
+﻿@{
+    ViewBag.Title = "Cargar PRD LAB";
+}
+
+<h2>Carga de productos de laboratorio VRS SAP</h2>
+<br />
+@using (Html.BeginForm("CargaMasiva", "TBL_MaterialesSAP", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @*@Html.AntiForgeryToken()*@
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="file" class="form-control-file" name="file" id="file" value="Selecciona el archivo" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" class="btn btn-success" id="Grabar" value="Cargar Prod. Laboratorio" onclick="return Confirmacion();"/>
+        </div>
+    </div>
+}
+
+@if (ViewBag.Carga == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Exitoso!",
+                text: "¡Se cargo el archivo de excel! Materiales actualizados",
+                icon: "success", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Error == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Se produjo un error en la carga!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.NoExcel == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡El documento no es un archivo de excel!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_NombreColumna == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Los nombre de las columnas no son los correctos! Tienen que ser MATKL, MATNR, MATLAB.",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_SinDatos == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡El documento de excel no contiene datos!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_Columnas == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡El número de columnas del archivo de excel no es el indicado! El indicado son 3 columnas...",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_MATNR == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Contiene celdas vacias en la columna código material(MATNR)!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_MATNRRepetidos == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Contiene datos repetidos en celdas de la columna código material(MATNR)!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_MATKL == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Contiene celdas vacias en la columna código de casa(MATKL)!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_MATLAB == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Contiene celdas vacias en la columna nombre laboratorio material(MATLAB)!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_MATLABRepetidos == "Y")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Contiene datos repetidos en celdas de la columna nombre laboratorio material(MATLAB)!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@section scripts{
+    <script type="text/javascript">
+        function Confirmacion()
+        {
+            if (window.confirm("¿Desea confirmar la solicitud?") == true) {
+                var archivo = $("#file").val();
+                if (archivo != "") {
+                    return true;
+                }
+                else {
+                    swal({
+                        title: "¡Error!",
+                        text: "No ha seleccionado ningún archivo de excel:",
+                        icon: "error", //built in icons: success, warning, error, info
+                        timer: 5000, //timeOut for auto-close
+                    });
+                    return false;
+                }
+            }
+            else
+            {
+                swal({
+                    title: "¡Aviso!",
+                    text: "¡La acción ha sido cancelada!",
+                    icon: "warning", //built in icons: success, warning, error, info
+                    timer: 5000, //timeOut for auto-close
+                });
+                return false;
+            }
+        }
+    </script>
+    }

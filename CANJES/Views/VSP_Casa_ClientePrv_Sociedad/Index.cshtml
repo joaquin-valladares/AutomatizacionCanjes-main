@@ -1,0 +1,429 @@
+﻿@model IEnumerable<CANJES.Models.VSP_Casa_ClientePrv_Sociedad>
+@{
+    ViewBag.Title = "Carga de Archivo Excel";
+}
+
+<h2>Carga de Materiales / Archivo de Excel</h2>
+<hr />
+
+@using (Html.BeginForm("CargarArchivo", "VSP_Casa_ClientePrv_Sociedad", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-6"><span class="badge badge-pill badge-secondary">1</span> Casa</label>
+                        <div class="col-md-12">
+                            @Html.DropDownList("CodCasa", new SelectList(ViewBag.CodCasa, "Value", "Text"), "---Seleccione Casa---", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-6"><span class="badge badge-pill badge-secondary">2</span> Archivo</label>
+                        <div class="col-md-12">
+                            <input type="file" class="form-control-file" name="file" id="file" value="Selecciona el archivo" />
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-6"><span class="badge badge-pill badge-secondary">3</span> Cliente</label>
+                        <div class="col-md-12">
+                            @Html.DropDownList("Cliente", new SelectList(ViewBag.Cliente, "Value", "Text"), "---Seleccione Cliente---", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>*@
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="col-md-6"><span class="badge badge-pill badge-secondary">3</span> Observación</label>
+                        <div class="col-md-12">
+                            @Html.Editor("Observacion", new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+
+    <table class="table table-responsive-lg" id="tabla">
+        <thead>
+            <tr>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.CodCasa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Casa)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.CodProvSAP)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre_según_Proveedor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CodClienteSAP)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.CodSoc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sociedad)
+                </th>
+                @*<th></th>*@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.CodCasa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Casa)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.CodProvSAP)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre_según_Proveedor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CodClienteSAP)
+                    </td>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.CodSoc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sociedad)
+                    </td>
+                    @*<td>
+                            <input type="file" class="form-control-file" name="file" id="file" value="Selecciona el archivo" />
+                        </td>*@
+                    <td>
+                        @*@Html.ActionLink("Cargar Documento", "CargarArchivo", new { Cod_Casa_SAP = item.CodCasa, Cod_Prov_SAP = item.CodProvSAP, Sociedad = item.CodSoc }, htmlAttributes: new { title = "Cargar Archivo", @style = "color: white;", @class = "btn btn-info", @onclick = "return Confirmar1();" })*@
+                        <input type="submit" id="CargarArchivo" value="Cargar Archivo" class="btn btn-success" onclick="return Confirmar1();" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @Html.Hidden("Cod_Casa_SAP")
+    @Html.Hidden("Cod_Prov_SAP")
+    @Html.Hidden("Cod_Cliente_SAP")
+    @Html.Hidden("Sociedad")
+    @Html.Hidden("Nombre_Segun_Proveedor")
+    @Html.Hidden("Cliente")
+}
+
+@************ Área de mensajes ************@
+
+@if (ViewBag.VSPCCS_NoExcel != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡El documento no es un archivo de excel!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_SinDatos != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡El documento de excel no contiene datos!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_Columnas != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡El número de columnas del archivo de excel no es el indicado! El indicado son 2 columnas...",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_Material != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Contiene celdas vacias en la columna material!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_MatCarEsp != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Contiene carácteres especiales en celdas de la columna material!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_MatRepetidos != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Contiene datos repetidos en celdas de la columna material!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_Cantidad != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Contiene celdas vacias en la columna cantidad solicitada!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_CantNumero != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡La columna cantidad solicitada debe ser númerica, favor revise!",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_Cargado != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Datos Cargados!",
+                text: "¡Los datos fueron cargados! Revisar pantalla de autorización...",
+                icon: "success", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+
+@if (ViewBag.Excel_NombreColumna != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal({
+                title: "¡Error!",
+                text: "¡Los nombre de las columnas no son los correctos! Tienen que ser Material y Cantidad.",
+                icon: "error", //built in icons: success, warning, error, info
+                timer: 5000, //timeOut for auto-close
+            });
+        };
+    </script>
+}
+@************ Fin Área de mensajes ************@
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js\"></script>
+    <link href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(Document).ready(function () {
+            $('#tabla').DataTable({
+                "paging": true,
+                "ordering": true,
+                "info": true,
+                "pagingType": "full_numbers",
+                "searching": true,
+                "pageLength": 5,
+                //Lenguaje:
+                "language": {
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                    },
+                    "info": "Mostrar Entradas de _START_ a _TOTAL_",
+                    "infoEmpty": "Total de Entradas 0",
+                    "infoFiltered": "Filtrado de _MAX_ entradas totales",
+                    "lengthMenu": "Mostrar _MENU_ Entradas",
+                    "search": "Filtrar"
+                },
+                //"fixedColumns": false,
+                //"scrollCollapse": true,
+                //"scrollY": "300px",
+                //"scrollX": true
+                //,
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="far fa-file-excel"></i> Exportar a excel',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6]
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="far fa-file-pdf" title= "Guardar como PDF"></i> Pdf',
+                        orientation: 'landscape',
+                        pageSize: 'LEGAL',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6]
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="fas fa-file-csv" title= "Guardar como CSV"></i> CSV',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6]
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-default rounded-0',
+                        text: '<i class="fas fa-print"></i> Imprimir tabla',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6]
+                        }
+                    }
+                ]
+            });
+        });
+
+        $("#CodCasa").bind("change", function () {
+            var CodCasa = $('select[id=CodCasa]').val();
+            CodCasa = CodCasa.toString();
+            location.href = '@Url.Action("Index", "VSP_Casa_ClientePrv_Sociedad")?CodCasa=' + CodCasa;
+        });
+
+        function Confirmar1() {
+            var archivo = $("#file").val();
+            var cliente = $("#Cliente").val();
+            var observacion = $("#Observacion").val();
+
+            if (window.confirm("¿Desea confirmar la solicitud?") == true) {
+                if (archivo != "") {
+                    if (cliente == "") {
+                        swal({
+                            title: "¡Advertencia!",
+                            text: "Llene el cuadro de texto -- Cliente --",
+                            icon: "warning", //built in icons: success, warning, error, info
+                            timer: 5000, //timeOut for auto-close
+                        });
+                        return false;
+                    }
+                    else if (observacion == "") {
+                        swal({
+                            title: "¡Advertencia!",
+                            text: "Llene el cuadro de texto -- Observación --",
+                            icon: "warning", //built in icons: success, warning, error, info
+                            timer: 5000, //timeOut for auto-close
+                        });
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                }
+                else {
+                    swal({
+                        title: "¡Error!",
+                        text: "No ha seleccionado ningún archivo de excel:",
+                        icon: "error", //built in icons: success, warning, error, info
+                        timer: 5000, //timeOut for auto-close
+                    });
+                    return false;
+                }
+            }
+            else {
+                alert("¡La acción ha sido cancelada!");
+                return false;
+            }
+        }
+
+        $('#tabla tr').on('click', function () {
+            var Cod_Casa_SAP = $(this).find('td:nth-child(1)').html();
+            var Cod_Prov_SAP = $(this).find('td:nth-child(3)').html();
+            var Nombre_Segun_Proveedor = $(this).find('td:nth-child(4)').html();
+            var Cod_Cliente_SAP = $(this).find('td:nth-child(5)').html();
+            var Sociedad = $(this).find('td:nth-child(6)').html();
+
+            $("#Cod_Casa_SAP").val(Cod_Casa_SAP.trim());
+            $("#Cod_Prov_SAP").val(Cod_Prov_SAP.trim());
+            $("#Cod_Cliente_SAP").val(Cod_Cliente_SAP.trim());
+            $("#Cliente").val(Cod_Cliente_SAP.trim());
+            $("#Sociedad").val(Sociedad.trim());
+            $("#Nombre_Segun_Proveedor").val(Nombre_Segun_Proveedor.trim());
+
+        });
+
+        //$("#Cliente").bind('keypress', function (event) {
+        //    var regex = new RegExp("^[0-9]+$");
+        //    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+        //    if (!regex.test(key)) {
+        //        event.preventDefault();
+        //        return false;
+        //    }
+        //});
+
+        $("#Observacion").bind('keypress', function (event) {
+            var regex = new RegExp("^[a-záéíóúA-ZÁÉÍÓÚ0-9 ]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    </script>
+}

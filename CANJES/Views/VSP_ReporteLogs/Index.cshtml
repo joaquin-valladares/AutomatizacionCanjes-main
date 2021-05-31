@@ -1,0 +1,290 @@
+﻿@*@model IEnumerable<CANJES.Models.VSP_ReporteLogsCanjes>*@
+@model IEnumerable<CANJES.Models.ClsRepLogs>
+
+
+@{
+    ViewBag.Title = "Reporte de logs de canjes";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    @*datatables*@
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        .dataTables_wrapper .dataTables_length {
+            float: left !important;
+        }
+    </style>
+
+    <h2 class="text-primary">@ViewBag.Title</h2>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="form-row">
+                <label class="col-md-12 ml-2 text-primary"><span class="badge badge-pill badge-secondary">*</span> Seleccione valores para los filtros:</label>
+            </div>
+            <form action="VSP_ReporteLogs/filtrarLista" method="post">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        @Html.DropDownList("id_sociedad2", new SelectList(string.Empty, "Value", "Text"), "---Seleccione sociedad---", htmlAttributes: new { @class = "form-control", maxlength = 150 })
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        @Html.DropDownList("id_centro", new SelectList(string.Empty, "Value", "Text"), "---Seleccione centro---", htmlAttributes: new { @class = "form-control", maxlength = 150 })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="text-left">Desde: </label>
+                        <input type="datetime-local" id="Fecha_inicial" name="Fecha_inicial" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="text-left">Hasta: </label>
+                        <input type="datetime-local" id="Fecha_final" name="Fecha_final" class="form-control" />
+                    </div>
+                    <div class="col-md-4" style="margin-top: 1.9rem;">
+                        <button class="btn btn-block btn-dark">Generar reporte</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="c-table">
+        <div class="table-responsive table-stripered ctable-hijo">
+            <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                        <th>
+                            Documento
+                        </th>
+                        <th>
+                            Código de producto
+                        </th>
+                        <th>
+                            Nombre SAP
+                        </th>
+                        <th>
+                            Nombre segun proveedor
+                        </th>
+
+                        <th>
+                            Cantidad solicitada
+                        </th>
+                        <th>
+                            Unidad
+                        </th>
+                        <th>
+                            Nombre cliente
+                        </th>
+                        <th>
+                            Estado
+                        </th>
+                        <th>
+                            Fecha autorización
+                        </th>
+                        <th>
+                            Número de pedido
+                        </th>
+                        <th>Fecha Pedido</th>
+                        <th>
+                            Sociedad
+                        </th>
+                        <th>
+                            Centro
+                        </th>
+
+                        @*<th>
+                                Fecha
+                            </th>*@
+                        @*<th>
+                                @Html.DisplayNameFor(model => model.Mensaje1)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Mensaje2)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Mensaje3)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Mensaje4)
+                            </th>*@
+                        <th>
+                            Observaciones
+                        </th>
+                        @*<th></th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Documento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CodLabProd)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_SAP)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_Segun_Proveedor)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantidad_Solicitada)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UNIDAD)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_Cliente)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Estado)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fecha)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NumMigo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fecha_MIGO)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_Sociedad)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_Centro)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Observaciones)
+                            </td>
+                            @*<td>
+                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                </td>*@
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+}
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+
+
+        <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.bootstrap4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.colVis.min.js"></script>
+
+
+        @*para iniciar el datatable*@
+        <script>
+            $(document).ready(function () {
+                $('#table_id').DataTable({
+                    "paging": true,
+                    "ordering": true,
+                    "info": true,
+                    "pagingType": "full_numbers",
+                    "searching": true,
+                    "pageLength": 10,
+                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    //Lenguaje:
+                    "language": {
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "previous": "Anterior",
+                            "next": "Siguiente",
+                        },
+                        "info": "Mostrar Entradas de _START_ a _TOTAL_",
+                        "infoEmpty": "Total de Entradas 0",
+                        "infoFiltered": "Filtrado de _MAX_ entradas totales",
+                        "lengthMenu": "Mostrar _MENU_ Entradas",
+                        "search": "Filtrar"
+                    },
+                    dom: 'Blfrtip',
+                    buttons: [
+                        {
+                            extend: 'excel',
+                            className: 'btn btn-default rounded-0',
+                            text: '<i class="far fa-file-excel"></i> Exportar a excel',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            className: 'btn btn-default rounded-0',
+                            text: '<i class="far fa-file-pdf" title= "Guardar como PDF"></i> Pdf',
+                            orientation: 'landscape',
+                            pageSize: 'LEGAL',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                            }
+                        }
+                    ]
+                });
+
+                // Traer información de Sociedades
+                $.getJSON('/VSP_ReporteLogs/GetSociedades', function (data) {
+                    $.each(data, function () {
+                        $('#id_sociedad2').append('<option value=' +
+                            this.Value + '>' + this.Text + '</option>');
+                    });
+                });
+
+
+                //Traer información de Centtos
+                $("#id_sociedad2").bind('click', function () {
+                    var id = $('select[id=id_sociedad2]').val();
+                    $('#id_centro').empty();
+                    $('#id_centro').val('');
+
+                    $.getJSON('/VSP_ReporteLogs/GetCentros', { sociedad_id: id }, function (data) {
+                        $.each(data, function () {
+                            $('#id_centro').append('<option value=' +
+                                this.Value + '>' + this.Text + '</option>');
+                        });
+                    });
+                });
+
+                //// Traer información de grupo articulos
+                $.getJSON('/VSP_ReporteLogs/GetGRUPOPROD', function (data) {
+                    $.each(data, function () {
+                        $('#id_grupo2').append('<option value=' +
+                            this.Value + '>' + this.Text + '</option>');
+                    });
+                });
+
+                // Traer información de grupo articulos
+                $.getJSON('/VSP_ReporteLogs/GetPaises', function (data) {
+                    $.each(data, function () {
+                        $('#id_grupo').append('<option value=' +
+                            this.Value + '>' + this.Text + '</option>');
+                    });
+                });
+            });
+        </script>
+    }
+

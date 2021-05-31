@@ -1,0 +1,166 @@
+﻿@model CANJES.Models.TBL_UsuariosCanjes
+
+@{
+    ViewBag.Title = "Editar usuario";
+}
+
+<h2 class="text-primary">@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
+    @Html.HiddenFor(model => model.id_sociedad)
+
+    @Html.HiddenFor(model => model.id_centro)
+    @Html.HiddenFor(model => model.id_estado)
+    @Html.HiddenFor(model => model.id_rol)
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <label class="col-md-12 ml-2"><span class="badge badge-pill badge-secondary">1</span> Editar datos del nuevo usuario:</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.nombreUsuario, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.nombreUsuario, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.pass, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.pass, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <label class="col-md-12 ml-2"><span class="badge badge-pill badge-secondary">2</span> Editar sociedad y centro:</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @*@Html.EditorFor(model => model.id_sociedad, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownList("id_sociedad2", new SelectList(string.Empty, "Value", "Text"), "---Seleccione sociedad---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_sociedad, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @*@Html.EditorFor(model => model.id_centro, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownList("id_centro2", new SelectList(string.Empty, "Value", "Text"), "---Seleccione centro---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_centro, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <label class="col-md-12 ml-2"><span class="badge badge-pill badge-secondary">3</span> Editar estado y rol:</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @*@Html.EditorFor(model => model.id_estado, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownList("id_estado2", new SelectList(string.Empty, "Value", "Text"), "---Seleccione estado---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_estado, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @*@Html.EditorFor(model => model.id_rol, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownList("id_rol2", new SelectList(string.Empty, "Value", "Text"), "---Seleccione rol---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_rol, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Guardar modificación" class="btn btn-outline-info" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Volver a la lista", "Index")
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            var id = $("#id_sociedad").val();
+
+            // Traer información de paises
+            $.getJSON('/TBL_UsuariosCanjes/GetSociedades', function (data) {
+                $.each(data, function () {
+                    $('#id_sociedad2').append('<option value=' +
+                        this.Value + '>' + this.Text + '</option>');
+                    //var id = $("#emp_id").val();
+                    $("#id_sociedad2 option[value='" + id + "']").attr('selected', 'selected');
+                });
+            });
+
+
+
+            var id_centro = $("#id_centro").val();
+            var id_rol = $("#id_rol").val();
+            var id_estado = $("#id_estado").val();
+
+
+            // Traer información de los laboratorios
+            $.getJSON('/TBL_UsuariosCanjes/GetCentros', { sociedad_id: id }, function (data) {
+                $.each(data, function () {
+                    $('#id_centro2').append('<option value=' +
+                        this.Value + '>' + this.Text + '</option>');
+                    $("#id_centro2 option[value='" + id_centro + "']").attr('selected', 'selected');
+                });
+            });
+
+
+            // Traer información de los roles
+            $.getJSON('/TBL_UsuariosCanjes/GetRoles', function (data) {
+                $.each(data, function () {
+                    $('#id_rol2').append('<option value=' +
+                        this.Value + '>' + this.Text + '</option>');
+                    $("#id_rol2 option[value='" + id_rol + "']").attr('selected', 'selected');
+                });
+            });
+
+            // Traer información de los estados
+            $.getJSON('/TBL_UsuariosCanjes/GetEstado', function (data) {
+                $.each(data, function () {
+                    $('#id_estado2').append('<option value=' +
+                        this.Value + '>' + this.Text + '</option>');
+                    $("#id_estado2 option[value='" + id_estado + "']").attr('selected', 'selected');
+                });
+            });
+        })
+    </script>
+}

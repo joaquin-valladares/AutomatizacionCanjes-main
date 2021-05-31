@@ -1,0 +1,46 @@
+﻿@model CANJES.Models.ClsUsuariosDashboard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details 2</h2>
+
+<div>
+    <h4>TBL_UsuariosCanjes</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.nombre)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.email)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.id_estado)
+        </div>
+        <div class="col-md-6">
+            @Html.DisplayFor(model => model.id_rol)
+        </div>
+    </div>
+
+    <table class="table" id="table_id">
+        <thead>
+            <tr>
+                <th>Sociedad</th>
+                <th>Centro</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.sociedades)</td>
+                <td>@Html.DisplayFor(model => model.centros)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

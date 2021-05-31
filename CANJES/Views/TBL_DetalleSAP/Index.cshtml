@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CANJES.Models.TBL_DetalleSAP>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Consecutivo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre_Segun_Proveedor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad_Solicitada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Saldo_SAP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad_Enviar)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Consecutivo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre_Segun_Proveedor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cantidad_Solicitada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Saldo_SAP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cantidad_Enviar)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

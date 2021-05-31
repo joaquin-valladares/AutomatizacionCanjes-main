@@ -1,0 +1,58 @@
+﻿@model CANJES.Models.TBL_DetalleSAP
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TBL_DetalleSAP</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Consecutivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Consecutivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre_Segun_Proveedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_Segun_Proveedor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad_Solicitada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad_Solicitada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Saldo_SAP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Saldo_SAP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cantidad_Enviar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cantidad_Enviar)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="470886a514b44eb787987457d348d85a" Name="Diagram1">
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_Anio" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_Casa_Proveedor_SAP" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_Centros" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_Dias" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_EncabezadoSAP" Width="2.125" PointX="4.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_MaestrosCanjes" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_Meses" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_Sociedades" Width="1.5" PointX="6.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_UsuariosCanjes" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_UsuariosCanjes_Estado" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_UsuariosCanjes_Roles" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_Autorizaciones_Detalle" Width="2.125" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_Autorizaciones_Encabezado" Width="2.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_Casa_ClientePrv_Sociedad" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_Casa_Proveedor_SAP" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_CASA_SAP" Width="1.5" PointX="6.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_DatosUsuarios" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_MATERIALES_CASAS" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_PROVEEDORES_SAP" Width="1.5" PointX="8.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_ReporteLogs1" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_ReporteLogsCanjes" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_DetalleSAP" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_ReporteLogs" Width="1.5" PointX="13.375" PointY="6.75" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_LOGERROR" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="AUTCANJESModel.TBL_MaterialesSAP" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="AUTCANJESModel.VSP_CLIENTE_X_SOCIEDAD_SAP" Width="1.5" PointX="3.375" PointY="14.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

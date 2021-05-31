@@ -1,0 +1,34 @@
+﻿@model CANJES.Models.TBL_UsuariosCanjes
+
+@{
+    ViewBag.Title = "Carga de datos";
+}
+
+<h2 class="text-primary">@ViewBag.Title</h2>
+<hr />
+<div class="container">
+    <form action="../../form-result.php" method="post" enctype="multipart/form-data" target="_blank">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                @Html.DropDownList("id_lab", new SelectList(string.Empty, "Value", "Text"), "---Seleccione Laboratorio---", htmlAttributes: new { @class = "form-control", maxlength = 150 })
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Observaciones" } })
+            </div>
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Cliente" } })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @*<button class="btn btn-block btn-dark"  type="file"> Cargar Archivo</button>*@
+                <input type="file" name="archivosubido" class="btn btn-block btn-dark">
+            </div>
+            <div class="col-md-6">
+                @*<button class="btn btn-block btn-dark"  type="file"> Cargar Archivo</button>*@
+                <input type="button" value="Autorizar canje" class="btn btn-block btn-dark">
+            </div>
+        </div>
+    </form>
+ 
+</div>

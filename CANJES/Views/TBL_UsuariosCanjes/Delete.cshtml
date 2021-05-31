@@ -1,0 +1,94 @@
+﻿@model CANJES.Models.TBL_UsuariosCanjes
+
+@{
+    ViewBag.Title = "Eliminar";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>¿Estás seguro/a de eliminar este registro?</h3>
+<div>
+    <hr />
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="col-md-12 font-weight-bold">
+                                Nombre del usuario:
+                            </label>
+                            @Html.DisplayFor(model => model.nombreUsuario)
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-md-12 font-weight-bold">
+                                Contraseña:
+                            </label>
+                            @Html.DisplayFor(model => model.pass)
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-md-12 font-weight-bold">
+                                Correo:
+                            </label>
+                            @Html.DisplayFor(model => model.email)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-md-12 font-weight-bold">
+                                Sociedad:
+                            </label>
+                            @Html.DisplayFor(model => model.id_sociedad)
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-12 font-weight-bold">
+                                Centro:
+                            </label>
+                            @Html.DisplayFor(model => model.id_centro)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="col-md-12 font-weight-bold">
+                                Sociedad:
+                            </label>
+                            @Html.DisplayFor(model => model.id_estado)
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-12 font-weight-bold">
+                                Centro:
+                            </label>
+                            @Html.DisplayFor(model => model.id_rol)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sí, eliminar" class="btn btn-outline-warning" /> |
+            @Html.ActionLink("No, volver a la lista", "Index")
+        </div>
+    }
+</div>

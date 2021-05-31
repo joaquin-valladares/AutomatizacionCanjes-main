@@ -1,0 +1,36 @@
+﻿@model CANJES.Models.TBL_Casa_Proveedor_SAP
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<h2>Detalles de Registro de Casa Proveedor SAP</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt class="col-sm-2">
+            @Html.DisplayName("Código de la casa")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cod_Casa_SAP)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayName("Código del cliente tipo proveedor SAP")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cod_Cliente_SAP)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Código de Sociedad")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Sociedad)
+        </dd>
+    </dl>
+</div>
+<p>
+    <div class="mt-3">
+        <a href="@Url.Action("Index", "TBL_Casa_Proveedor_SAP" )"><i class="fas fa-arrow-circle-left"></i> Regresar a listado</a>
+    </div>
+</p>

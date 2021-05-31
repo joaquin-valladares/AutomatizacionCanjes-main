@@ -1,0 +1,29 @@
+﻿
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+
+.bg-footerKielsa, .btn-colorazul, .badge-secondary {
+    background-color: #0c87e7;
+    color: #fff;
+}
+
+.center {
+    display: block !important;
+    margin: auto !important;
+}
+
+.btn-drop {
+    font-size: 1.25rem !important;
+    padding-top: 0.3125rem !important;
+}

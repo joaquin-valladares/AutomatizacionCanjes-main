@@ -1,0 +1,84 @@
+﻿@model CANJES.Models.TBL_EncabezadoSAP
+
+@{
+    ViewBag.Title = "Editar Documento Encabezado";
+}
+
+<h2> Editar / Documento Encabezado</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Documento)
+
+    @Html.HiddenFor(model => model.Cod_Casa_SAP)
+
+    @Html.HiddenFor(model => model.Cod_Prov_SAP)
+
+    @Html.HiddenFor(model => model.Sociedad)
+
+    @Html.HiddenFor(model => model.Estado)
+
+    @Html.HiddenFor(model => model.Fecha)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Cliente, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Cliente, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Cliente, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Observaciones, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Observaciones, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Observaciones, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="form-actions no-color">
+            <a href="@Url.Action("Index", "TBL_EncabezadoSAP" )"><i class="fas fa-arrow-circle-left"></i> Regresar a listado</a> |
+            <input type="submit" id="Modificar" value="Guardar Cambios" class="btn btn-success" onclick="return Confirmar1();" />
+        </div>
+    </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function Confirmar1() {
+            if (window.confirm("¿Desea confirmar la solicitud?") == true) {
+                return true;
+            }
+            else {
+                alert("¡La acción ha sido cancelada!");
+                return false;
+            }
+        }
+
+        $("#Nombre_Cliente").bind('keypress', function (event) {
+            var regex = new RegExp("^[a-záéíóúA-ZÁÉÍÓÚ ]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+
+        $("#Observaciones").bind('keypress', function (event) {
+            var regex = new RegExp("^[a-záéíóúA-ZÁÉÍÓÚ0-9 ]+$");
+            var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+            if (!regex.test(key)) {
+                event.preventDefault();
+                return false;
+            }
+        });
+    </script>
+}
